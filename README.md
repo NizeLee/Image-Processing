@@ -40,7 +40,7 @@ void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent)
 				{
 					// Processing
 					DisplayCimage1D(Image1D, nW, nH, 0, 0, false, true);
-          // NewMethod(Image1D, nW, nH); // call 
+					// Instance.NewMethodExample(Image1D, nW, nH); // call 
 					//
 					m_bFirstFrame = false;
 					delete [] Image1D;
