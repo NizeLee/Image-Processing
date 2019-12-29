@@ -27,7 +27,7 @@ Image-Processing (Windows)
 void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent) 
 {
     ...
-      else if(nIDEvent == TID_SEQUENCE_RUN)
+			else if(nIDEvent == TID_SEQUENCE_RUN)
 			{
 				Sleep(m_nSleep);
 				...
