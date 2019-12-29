@@ -5,10 +5,11 @@
 ## Introduction
 * Open program sources (wihtout OpenCV)
 * Visual Studio 2019, 2017, 2015, 2013 and lower
+* Win32 and x64
 
 ## Source codes
 * Bitmap load and save (cpp), jpeg load and save (lib)
-* Format conversion (RGB, YUV)
+* Format conversion (RGB, YUV420, YUV422, YUV444)
 * Low level image processing (spatial filtering (including fast versions), frequency transform (DFT, FFT, DCT), ...)
 * Geometric transformation (affine, bilinear, perspective, ...)
 * Simple operations (Hough, boundary following, labeling, thinning, morphological operations, ...)
