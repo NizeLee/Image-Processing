@@ -16,6 +16,6 @@ Image-Processing (Windows)
   + Avi sequences
   + YUV sequences
 * **Multi-layer perceptron (MLP)**
-<img src="https://drive.google.com/file/d/1p7jit0pMIEb48xtauUf-WxJuWV9sahYU/view?usp=sharing"></img>  
-![Alt View]("https://drive.google.com/file/d/1p7jit0pMIEb48xtauUf-WxJuWV9sahYU/view?usp=sharing")
+* <img src="Image_processing_01.gif"></img>  
+
 
