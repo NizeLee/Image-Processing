@@ -32,20 +32,16 @@
 3. Add an instance member to CMainProcessDlg class (MainProcessDlg.h)
 4. Call the processing method as follows: 
 ``` C++
-void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent) 
-{
+void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent) {
     ...
-			else if(nIDEvent == TID_SEQUENCE_RUN)
-			{
+			else if(nIDEvent == TID_SEQUENCE_RUN) {
 				Sleep(m_nSleep);
 				...
-				else if(FileName.Right(4) == _T(".JPG"))
-				{
+				else if(FileName.Right(4) == _T(".JPG")) {
 					Image1D = ReadJpeg(mbcsFileName, &nW, &nH);
 				}
 
-				if(Image1D)
-				{
+				if(Image1D) {
 					// Processing
 					DisplayCimage1D(Image1D, nW, nH, 0, 0, false, true);
 					// Instance.NewMethodExample(Image1D, nW, nH); // call 
