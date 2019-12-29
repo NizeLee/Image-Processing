@@ -22,7 +22,7 @@ Image-Processing (Windows)
 
 ## Example code for sequential processing
 1. Add a new class
-2. Add a new processing method (1D array image)
+2. Add a new processing method (1D array image - BGR, 24bit, 4Byte aligned) 
 3. Add an instance member to CMainProcessDlg class (MainProcessDlg.h)
 4. Call the processing method as follows: 
 ``` C++
