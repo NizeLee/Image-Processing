@@ -2,7 +2,7 @@
 Image-Processing (Windows)
 
 ## Introduction
-* Open program sources for Image processing and Computer Vision
+* Open program sources (wihtout OpenCV) for Image processing and Computer Vision
 * Visual Studio 2019, 2017, 2015, 2013 and lower
 
 ## Source codes
