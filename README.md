@@ -4,7 +4,8 @@
 
 ## Introduction
 * Open program sources (wihtout OpenCV)
-* Visual Studio 2019, 2017, 2015, 2013 and lower
+* Visual Studio 2019, 2017, 2015, 2013 and lower 
+* GUI: MFC
 * Win32 and x64
 
 ## Source codes
