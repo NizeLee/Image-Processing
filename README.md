@@ -21,8 +21,8 @@
   + Image sequences (bmp, jpeg, pcx, ppm, png, raw)
   + Avi sequences
   + YUV sequences
-* **Multi-layer perceptron (MLP)**
 <br><br> <img src="Image_processing_01.gif"></img>  
+* **Multi-layer perceptron (MLP)**
 * **Avi recording**
   + Examples: [pupil segmentqtion](https://sites.google.com/site/khuaris/home/pupil-segmentation), [video stitching](https://sites.google.com/site/khuaris/home/video-stitching)
 
