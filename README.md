@@ -1,16 +1,22 @@
 # Image-Processing
-Image-Processing (Windows)
+* Image-Processing (Windows)
+* C/C++ development tool for image processing, computer vision and machine learning
 
 ## Introduction
-* Open program sources (wihtout OpenCV) for Image processing and Computer Vision
+* Open program sources (wihtout OpenCV)
 * Visual Studio 2019, 2017, 2015, 2013 and lower
 
 ## Source codes
 * Bitmap load and save (cpp), jpeg load and save (lib)
 * Format conversion (RGB, YUV)
-* Low level image processing (spatial filtering, frequency transform, ...)
+* Low level image processing (spatial filtering (including fast versions), frequency transform (DFT, FFT, DCT), ...)
 * Geometric transformation (affine, bilinear, perspective, ...)
 * Simple operations (Hough, boundary following, labeling, thinning, morphological operations, ...)
+* Drawing functions for text (Windows), line, circle and ellipse
+* ROI setting (AABB and polygon)
+* Web camera processing
+* Image sequence saving
+* Easy debugging (image, text, listbox)
 * **Sequential processing**
   + Image sequences (bmp, jpeg, pcx, ppm, png, raw)
   + Avi sequences
