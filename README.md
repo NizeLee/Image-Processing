@@ -14,7 +14,7 @@
 * Geometric transformation (affine, bilinear, perspective, ...)
 * Simple operations (Hough, boundary following, labeling, thinning, morphological operations, ...)
 * Drawing functions for text (Windows), line, circle and ellipse
-* ROI setting (AABB and polygon)
+* ROI setting (AABB and polygons)
 * Web camera processing
 * Image sequence saving
 * Easy debugging (image, text, listbox)
