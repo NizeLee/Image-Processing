@@ -2,7 +2,7 @@
 Image-Processing (Windows)
 
 ## Introduction
-* Open source program for Image processing and Computer Vision
+* Open program sources for Image processing and Computer Vision
 * Visual Studio 2019, 2017, 2015, 2013 and lower
 
 ## Source codes
@@ -17,6 +17,8 @@ Image-Processing (Windows)
   + YUV sequences
 * **Multi-layer perceptron (MLP)**
 <br><br> <img src="Image_processing_01.gif"></img>  
+* **Avi recording**
+  + Examples: [pupil segmentqtion](https://sites.google.com/site/khuaris/home/pupil-segmentation), [video stitching](https://sites.google.com/site/khuaris/home/video-stitching)
 
 ## Example code for sequential processing
 1. Add a new class
