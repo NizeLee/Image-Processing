@@ -63,6 +63,6 @@ void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent) {
 ```
 ## Visual Studio
 * Visual Studio 2019, 2017, and 2015
-<br> <img src="Image_processing_01.gif"></img>  
+<br> <img src="Image_processing_02.png"></img>  
 * Visual Studio 2013 and lower 
-<br> <img src="Image_processing_01.gif"></img>  
+<br> <img src="Image_processing_02.png"></img>  
