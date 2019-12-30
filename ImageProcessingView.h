@@ -24,30 +24,6 @@
 #define ERM_SCALE			3
 #define ERM_PT_MOVE			4
 
-/*
-class DPoint{
-public:
-	double x, y;
-
-	DPoint() : x(0), y(0) {};
-	DPoint(double xx, double yy) : x(xx), y(yy) {};
-	DPoint operator = (CPoint &p) {
-		return DPoint(p.x, p.y);
-	}
-
-	DPoint operator += (CPoint &p) {
-		return DPoint(x+p.x, y+p.y);
-	}
-
-	DPoint operator += (CSize &sz) {
-		return DPoint(x+sz.cx, y+sz.cy);
-	}
-
-	operator CPoint () {
-		return CPoint((int)x, (int)y);
-	}
-};*/
-
 class CViewRegion  {
 public:
 	CPoint Pt[MAX_REGION][MAX_REGION_POINT];
@@ -90,10 +66,10 @@ public:
 	bool m_bEditRegionState;
 	int m_nEditRegionMode;
 
-	BITMAPINFOHEADER m_BmiHeader;	// 화면 출력을 위한 비트맵 헤더
-	int m_nCurrentImage;			// 마우스 처리를 위한, 현재 영상 번호
-	CPoint m_SaveStartPoint;		// 마우스 처리를 위한, 최초 클릭한 위치
-	CRect m_PrevRect;				// 마우스 처리를 위한, 이전에 표한 영상 사각형 정보
+	BITMAPINFOHEADER m_BmiHeader;	
+	int m_nCurrentImage;			
+	CPoint m_SaveStartPoint;		
+	CRect m_PrevRect;				
 	CPoint m_PastePoint;
 
 	CString m_ViewMsg;
@@ -101,20 +77,15 @@ public:
 	int m_nSelectRegion;
 	CRect m_rtSelectRegion;
 
-	int GetCurrentImageRect(CPoint point);	// point 좌표를 포함하는 영상을 현재 영상으로 지정
-	int GetCurrentImagePos(CPoint point);	// point 좌표와 (좌상) 위치가 동일한 영상을 현재 영상으로 지정
+	int GetCurrentImageRect(CPoint point);	
+	int GetCurrentImagePos(CPoint point);	
 
-	// 마지막 영상의 폭, 높이, 위치 읽기
 	bool GetCurrentImageInfo(int *pW, int *pH, int *pPosX, int *pPosY, int nIndex = 0);
-	// 마지막 영상을 2차원 회색조 정보로 읽기
 	bool GetCurrentImageGray(BYTE **ImageGray, int nIndex = 0);
-	// 2차원 회색조 영상을 출력
 	bool DisplayCimage2D(BYTE **ImageGray, int nW, int nH, int nPosX, int nPosY, bool bErase = true, bool bDelete = false, int Rate = 100);
 	bool DisplayCimage1D(BYTE *Image1D, int nW, int nH, int nPosX, int nPosY, bool bErase = true, bool bDelete = false, int Rate = 100);
-	// 마지막 영상을 2차원 컬러 정보로 읽기
 	bool GetCurrentImageColor(BYTE **ImageRed, BYTE **ImageGreen, BYTE **ImageBlue, int nIndex = 0);
 	bool GetCurrentImage1DColor(BYTE *Image1D, int nIndex = 0);
-	// 2차원 컬러 영상을 출력
 	bool DisplayCimage2DColor(BYTE **ImageRed, BYTE **ImageGreen, BYTE **ImageBlue, int nW, int nH, 
 		int nPosX, int nPosY, bool bErase = true, bool bDelete = false, int Rate = 100);
 

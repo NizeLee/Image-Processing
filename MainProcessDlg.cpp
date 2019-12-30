@@ -9,10 +9,10 @@
 
 #include "LodePng.h"
 
-#include "MainFrm.h"		// 추가
-#include "ChildFrm.h"		// 추가
-#include "ImageProcessingDoc.h"		// 추가
-#include "ImageProcessingView.h"	// 추가
+#include "MainFrm.h"		
+#include "ChildFrm.h"		
+#include "ImageProcessingDoc.h"
+#include "ImageProcessingView.h"	
 
 #include "YuvOptionDlg.h"
 #include "SaveScreenOpt.h"
@@ -1941,7 +1941,7 @@ void CMainProcessDlg::OnSaveRegion()
 
 void CMainProcessDlg::OnReadRegion() 
 {
-	CFileDialog dlg(TRUE, _T("*.rgn"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("RGN 파일(*.rgn)|*.rgn||"));
+	CFileDialog dlg(TRUE, _T("*.rgn"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("RGN Files(*.rgn)|*.rgn||"));
 	CMainFrame *pMain = (CMainFrame *)AfxGetMainWnd();
 	CChildFrame *pChild = (CChildFrame *)pMain->MDIGetActive();
 

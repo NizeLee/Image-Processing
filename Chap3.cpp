@@ -5,8 +5,8 @@
 #include "ImageProcessing.h"
 #include "Chap3.h"
 
-#include "Image.h"		// 추가
-#include  "Image4Win.h"
+#include "Image.h"		
+#include "Image4Win.h"
 
 #include <cmath>
 
@@ -94,13 +94,11 @@ void CChap3::OnHistogramEq()
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray, **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	HistogramEqualization(ImageGray, OutputGray, nW, nH);
@@ -116,13 +114,11 @@ void CChap3::OnMean()
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray, **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	int nWinSize = GetDlgItemInt(IDC_WINDOW_SIZE);
@@ -141,13 +137,11 @@ void CChap3::OnMedian()
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray, **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	int nWinSize = GetDlgItemInt(IDC_WINDOW_SIZE);
@@ -165,13 +159,11 @@ void CChap3::OnSobel()
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray, **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	Sobel(ImageGray, OutputGray, nW, nH);
@@ -187,13 +179,11 @@ void CChap3::OnLaplacian()
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray, **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	Laplacian(ImageGray, OutputGray, nW, nH);
@@ -209,13 +199,11 @@ void CChap3::OnLaplacianSharp()
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray, **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	LaplacianSharp(ImageGray, OutputGray, nW, nH);
@@ -233,7 +221,6 @@ void CChap3::OnDft()
 	double **OutputDouble;
 	double **OutputReal, **OutputImag;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
@@ -241,7 +228,6 @@ void CChap3::OnDft()
 	OutputReal = dmatrix(nH, nW);
 	OutputImag = dmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	double time = DFT2D(ImageGray, OutputReal, OutputImag, nW, nH);
@@ -272,7 +258,6 @@ void CChap3::OnDftRowCol()
 	double **OutputDouble;
 	double **OutputReal, **OutputImag;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
@@ -280,7 +265,6 @@ void CChap3::OnDftRowCol()
 	OutputReal = dmatrix(nH, nW);
 	OutputImag = dmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	double time = RowColDFT2D(ImageGray, OutputReal, OutputImag, nW, nH);
@@ -311,7 +295,6 @@ void CChap3::OnFft()
 	double **OutputDouble;
 	double **OutputReal, **OutputImag;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	int Radix2N;
@@ -337,7 +320,6 @@ void CChap3::OnFft()
 	OutputReal = dmatrix(nH, nW);
 	OutputImag = dmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	double time = FFT2D(ImageGray, OutputReal, OutputImag, nW, nH);
@@ -373,13 +355,11 @@ void CChap3::OnFiltering()
 	BYTE **ImageGray;
 	double **OutputDouble;
 	
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputDouble = dmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	Filtering(ImageGray, OutputDouble, nW, nH, nPosX, nPosY, nFilterType1, nFilterType2, nDC, nN); 
@@ -396,13 +376,11 @@ void CChap3::OnDistTrans()
 	BYTE **ImageGray;
 	double **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = dmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	DistanceTransform(ImageGray, OutputGray, nW, nH);

@@ -6,8 +6,8 @@
 #include "Chap5.h"
 #include "MainFrm.h"
 
-#include "Image.h"		// 추가
-#include  "Image4Win.h"
+#include "Image.h"		
+#include "Image4Win.h"
 
 #include <cmath>
 
@@ -68,8 +68,8 @@ BOOL CChap5::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	m_UpDownCtrl.InsertString(0, _T("상위"));
-	m_UpDownCtrl.InsertString(1, _T("하위"));
+	m_UpDownCtrl.InsertString(0, _T("Upper"));
+	m_UpDownCtrl.InsertString(1, _T("Lower"));
 	m_UpDownCtrl.SetCurSel(0);
 
 	SetDlgItemInt(IDC_PERCENT, 10);
@@ -78,9 +78,9 @@ BOOL CChap5::OnInitDialog()
 	CheckDlgButton(IDC_BIN, 1);
 	SetDlgItemInt(IDC_ELE_SIZE, 3);
 
-	m_ShapeCtrl.InsertString(0, _T("사각"));
-	m_ShapeCtrl.InsertString(1, _T("수평"));
-	m_ShapeCtrl.InsertString(2, _T("수직"));
+	m_ShapeCtrl.InsertString(0, _T("Square"));
+	m_ShapeCtrl.InsertString(1, _T("-"));
+	m_ShapeCtrl.InsertString(2, _T("|"));
 	m_ShapeCtrl.SetCurSel(0);
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -102,13 +102,11 @@ void CChap5::OnThresholdingPtile()
 	int nPercent = GetDlgItemInt(IDC_PERCENT);
 	int nType = m_UpDownCtrl.GetCurSel();
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	pTileThresholding(ImageGray, OutputGray, nW, nH, nPercent/100., nType);
@@ -125,13 +123,11 @@ void CChap5::OnThresholdingValley()
 	BYTE **ImageGray;
 	BYTE **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	ValleyThresholding(ImageGray, OutputGray, nW, nH);
@@ -148,13 +144,11 @@ void CChap5::OnThresholdingIterate()
 	BYTE **ImageGray;
 	BYTE **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	IterateThresholding(ImageGray, OutputGray, nW, nH);
@@ -172,7 +166,6 @@ void CChap5::OnHough()
 	double **OutputDouble;
 	int nSW, nSH;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
@@ -182,7 +175,6 @@ void CChap5::OnHough()
 	nSH = (int)(sqrt(double(nW*nW+nH*nH))/2.)*2;
 	OutputDouble = dmatrix(nSH, nSW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	HoughTransform(ImageGray, OutputDouble, nW, nH);
@@ -256,13 +248,11 @@ void CChap5::OnTurtle()
 	BYTE **ImageGray;
 	BYTE **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	CIpPoint *Boundary;
@@ -294,13 +284,11 @@ void CChap5::OnKCosine()
 	BYTE **ImageGray;
 	BYTE **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	CIpPoint *Boundary;
@@ -365,13 +353,11 @@ void CChap5::OnDilation()
 	BYTE **ImageGray;
 	BYTE **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	int nSize = GetDlgItemInt(IDC_ELE_SIZE);
@@ -394,13 +380,11 @@ void CChap5::OnErosion()
 	BYTE **ImageGray;
 	BYTE **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	int nSize = GetDlgItemInt(IDC_ELE_SIZE);
@@ -423,14 +407,12 @@ void CChap5::OnClose()
 	BYTE **ImageGray;
 	BYTE **OutputGray, **TempGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 	TempGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	int nSize = GetDlgItemInt(IDC_ELE_SIZE);
@@ -460,14 +442,12 @@ void CChap5::OnOpen()
 	BYTE **ImageGray;
 	BYTE **OutputGray, **TempGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 	TempGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	int nSize = GetDlgItemInt(IDC_ELE_SIZE);
@@ -497,13 +477,11 @@ void CChap5::OnLabeling()
 	BYTE **ImageGray;
 	int **OutputLabel;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputLabel = imatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	Labeling(ImageGray, OutputLabel, nW, nH, 100);
@@ -519,13 +497,11 @@ void CChap5::OnThinning()
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray, **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	Thinning(ImageGray, OutputGray, nW, nH);
@@ -542,13 +518,11 @@ void CChap5::OnLabelingMoment()
 	BYTE **ImageGray;
 	int **OutputLabel;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputLabel = imatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	int LabelCnt = Labeling(ImageGray, OutputLabel, nW, nH, 100);

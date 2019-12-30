@@ -35,7 +35,7 @@ CBpn::CBpn(int nLayerCntInput, int *NodeCntInput, double dGainInput)
 		Node[i] = new double[NodeCnt[i]];
 
 	Weight = new double **[nLayerCnt];
-	for(i = 1 ; i < nLayerCnt ; i++)	// 0: 사용하지 않음
+	for(i = 1 ; i < nLayerCnt ; i++)	// 0: Not used
 	{
 		Weight[i] = new double *[NodeCnt[i]];
 		for(j = 0 ; j < NodeCnt[i] ; j++)
@@ -43,7 +43,7 @@ CBpn::CBpn(int nLayerCntInput, int *NodeCntInput, double dGainInput)
 	}
 
 	Delta = new double *[nLayerCnt];
-	for(i = 1 ; i < nLayerCnt ; i++)	// 0: 사용하지 않음
+	for(i = 1 ; i < nLayerCnt ; i++)	// 0: Not used
 		Delta[i] = new double[NodeCnt[i]];
 
 	dGain = dGainInput;

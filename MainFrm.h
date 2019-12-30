@@ -9,11 +9,11 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "Chap2.h"		// 추가
-#include "Chap3.h"		// 추가
-#include "Chap4.h"		// 추가
-#include "Chap5.h"		// 추가
-#include "Application.h"	// 추가
+#include "Chap2.h"		
+#include "Chap3.h"		
+#include "Chap4.h"		
+#include "Chap5.h"		
+#include "Application.h"
 #include "CoolDialogbar.h"
 #include "MainProcessDlg.h"
 

@@ -5,15 +5,15 @@
 #include "stdafx.h"
 #include "ImageProcessing.h"
 
-#include "MainFrm.h"		// 추가
-#include "ChildFrm.h"		// 추가
-#include "ImageProcessingDoc.h"		// 추가
-#include "ImageProcessingView.h"	// 추가
+#include "MainFrm.h"		
+#include "ChildFrm.h"		
+#include "ImageProcessingDoc.h"		
+#include "ImageProcessingView.h"	
 
 #include "Image.h"
-#include  "Image4Win.h"
+#include "Image4Win.h"
 
-#include <cmath>			// 추가
+#include <cmath>			
 
 bool SaveImage2DColorJpeg(char *FileName, unsigned char **ImageRed, unsigned char **ImageGreen, unsigned char **ImageBlue, 
 	int nW, int nH, bool bColor, int nQuality)
@@ -308,7 +308,6 @@ void SetViewMsg(CString ViewMsg, bool bErase)
 	pView->Invalidate(bErase);
 }
 
-// 마지막 영상의 폭, 높이, 위치 읽기
 bool GetCurrentImageInfo(int *pW, int *pH, int *pPosX, int *pPosY, int nIndex)
 {
 	CMainFrame *pMain = (CMainFrame *)AfxGetMainWnd();
@@ -322,7 +321,6 @@ bool GetCurrentImageInfo(int *pW, int *pH, int *pPosX, int *pPosY, int nIndex)
 	return pView->GetCurrentImageInfo(pW, pH, pPosX, pPosY, nIndex);
 }
 
-// 마지막 영상을 2차원 회색조 정보로 읽기
 bool GetCurrentImageGray(unsigned char **ImageGray, int nIndex)
 {
 	CMainFrame *pMain = (CMainFrame *)AfxGetMainWnd();
@@ -336,7 +334,6 @@ bool GetCurrentImageGray(unsigned char **ImageGray, int nIndex)
 	return pView->GetCurrentImageGray(ImageGray, nIndex);
 }
 
-// 2차원 회색조 영상을 출력
 bool DisplayCimage2D(unsigned char **ImageGray, int nW, int nH, int nPosX, int nPosY, bool bErase, bool bDelete, int Rate)
 {
 	CMainFrame *pMain = (CMainFrame *)AfxGetMainWnd();
@@ -350,7 +347,6 @@ bool DisplayCimage2D(unsigned char **ImageGray, int nW, int nH, int nPosX, int n
 	return pView->DisplayCimage2D(ImageGray, nW, nH, nPosX, nPosY, bErase, bDelete, Rate);
 }
 
-// 마지막 영상을 2차원 컬러 정보로 읽기
 bool GetCurrentImageColor(unsigned char **ImageRed, unsigned char **ImageGreen, unsigned char **ImageBlue, int nIndex)
 {
 	CMainFrame *pMain = (CMainFrame *)AfxGetMainWnd();
@@ -391,7 +387,6 @@ bool DisplayCimage1D(unsigned char *Image1D, int nW, int nH, int nPosX, int nPos
 		nPosX, nPosY, bErase, bDelete, Rate);
 }
 
-// 2차원 컬러 영상을 출력
 bool DisplayCimage2DColor(unsigned char **ImageRed, unsigned char **ImageGreen, unsigned char **ImageBlue, int nW, int nH, 
 	int nPosX, int nPosY, bool bErase, bool bDelete, int Rate)
 {
@@ -535,7 +530,7 @@ void Compression(unsigned char **ImageGray, unsigned char **OutputGray, int nW, 
 				}
 		}
 
-	// RMSE 계산
+	// RMSE 
 	double Rmse = 0;
 	for(y = 0 ; y < nH ; y++)
 		for(x = 0 ; x < nW ; x++)
@@ -543,7 +538,6 @@ void Compression(unsigned char **ImageGray, unsigned char **OutputGray, int nW, 
 	Rmse /= nW*nH;
 	Rmse = sqrt(Rmse);
 
-	// 결과 출력
 	CString ViewMsg;
 	ViewMsg.Format(_T("0: %d, RMSE: %7.3lf"), nZeroCount, Rmse);
 	SetViewMsg(ViewMsg);
@@ -570,7 +564,7 @@ void Filtering(unsigned char **ImageGray, double **OutputDouble, int nW, int nH,
 		for(u = 0 ; u < nW ; u++)
 		{
 			double Distance = sqrt(pow((double)((v+nH/2)%nH-nH/2), 2) + pow((double)((u+nW/2)%nW-nW/2), 2));
-			if(nFilterType1 == 0) // 이상적인 필터
+			if(nFilterType1 == 0) 
 			{
 				if(nFilterType2 == 0) // LPF
 				{
@@ -585,7 +579,7 @@ void Filtering(unsigned char **ImageGray, double **OutputDouble, int nW, int nH,
 						Filter[(v+nH/2)%nH][(u+nW/2)%nW] = 0;
 				}
 			}
-			else // 버터워즈 필터
+			else 
 			{
 				if(nFilterType2 == 0) // LPF
 					Filter[(v+nH/2)%nH][(u+nW/2)%nW] = 1./(1+pow(Distance/nDC, nN));
@@ -620,7 +614,6 @@ void ImageOperation(int nOperationType)
 	unsigned char **R1, **G1, **B1, **R2, **G2, **B2, **R, **G, **B;
 	int x, y;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW1, &nH1, &nPosX1, &nPosY1)) return;
 	if(!GetCurrentImageInfo(&nW2, &nH2, &nPosX2, &nPosY2, 1)) return;
 
@@ -642,7 +635,6 @@ void ImageOperation(int nOperationType)
 	G = cmatrix(nH, nW);
 	B = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray1);
 	GetCurrentImageColor(R1, G1, B1);
 

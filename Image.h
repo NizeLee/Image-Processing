@@ -9,7 +9,7 @@
 
 #define GRAY_CNT	256
 
-// 영상 정보 저장 구조체
+// Image Information
 struct ImageInfo 
 {
 	int nW, nH;
@@ -113,7 +113,6 @@ public:
 
 int IsPtInsidePolygon(CIpPoint *polygon, int N, CIpPoint p);
 
-// 2차원 메모리 할당 및 해제
 unsigned char  **cmatrix(int nH, int nW);
 void free_cmatrix(unsigned char  **Image, int nH, int nW);
 
@@ -123,18 +122,15 @@ void free_imatrix(int **Image, int nH, int nW);
 double **dmatrix(int nH, int nW);
 void free_dmatrix(double **Image, int nH, int nW);
 
-// 24비트 비트맵 영상의 크기 및 데이터 위치를 계산하는 함수
 int GetBmp24Size(int nW, int nH);
 int GetBmp24Pos(int nW, int nH, int x, int y);
 
-// 비트맵 파일 읽기, raw 파일 읽기, 비트맵 파일 저장(24비트 컬러)
 unsigned char  *ReadPpm(char *FileName, int *pW, int *pH);
 unsigned char  *ReadBmp(char *FileName, int *pW, int *pH);
 unsigned char  *ReadRaw(char *FileName, int nW, int nH);
 bool SaveBmp(char *FileName, unsigned char  *Image1D, int nW, int nH);
 
 unsigned char *ReadPcx(const char *FileName, int *pW, int *pH);
-//unsigned char *ReadPcx(const wchar_t *FileName, int *pW, int *pH);
 
 void Move(unsigned char  **ImageGray, unsigned char  **OutputGray, int nW, int nH, int x0, int y0);
 void Rotate(unsigned char  **ImageGray, unsigned char  **OutputGray, int nW, int nH, int nOutW, int nOutH, double dDeg);

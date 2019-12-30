@@ -113,7 +113,7 @@ void CApplication::OnVehicleRun()
 		m_nFrameNumber = 0;
 		SetTimer(VEHICLE, 30, NULL);
 
-		SetDlgItemText(IDC_VEHICLE_RUN, _T("중지"));
+		SetDlgItemText(IDC_VEHICLE_RUN, _T("Stop"));
 
 		m_bVehicleRun = TRUE;
 	}
@@ -121,7 +121,7 @@ void CApplication::OnVehicleRun()
 	{
 		KillTimer(VEHICLE);
 
-		SetDlgItemText(IDC_VEHICLE_RUN, _T("실행"));
+		SetDlgItemText(IDC_VEHICLE_RUN, _T("Run"));
 
 		m_bVehicleRun = FALSE;
 	}
@@ -159,7 +159,7 @@ void CApplication::OnAviRun()
 		m_nFrameNumber = 0;
 		SetTimer(AVI_VEHICLE, 30, NULL);
 
-		SetDlgItemText(IDC_LPR_RUN, _T("중지"));
+		SetDlgItemText(IDC_LPR_RUN, _T("Stop"));
 
 		m_bAviVehicleRun = TRUE;
 	}
@@ -172,14 +172,14 @@ void CApplication::OnAviRun()
 
 		KillTimer(AVI_VEHICLE);
 
-		SetDlgItemText(IDC_LPR_RUN, _T("실행"));
+		SetDlgItemText(IDC_LPR_RUN, _T("Run"));
 
 		m_bAviVehicleRun = FALSE;
 	}
 	
 }
 
-// 프레임 영상을 얻어올 때 호출되는 함수 - 사용자 지정 콜백 함수
+// Callback
 static LRESULT	CALLBACK capCallbackOnFrame(HWND hWnd, LPVIDEOHDR lpVHdr)
 {
 	UINT i;
@@ -207,26 +207,21 @@ void CApplication::OnMotionRun()
 		m_hWndCap = capCreateCaptureWindow(_T("Motion Detection Window"), WS_CHILD,
 			0, 0, m_nW, m_nH, m_hWnd, NULL);
 		
-		// 프레임 영상을 얻어올 때 호출되는 콜백 함수의 지정
 		capSetCallbackOnFrame(m_hWndCap, capCallbackOnFrame);
 
 		int Result;
 
-		// 드라이버 연결
 		if(Result = capDriverConnect(m_hWndCap, 0))
 		{
-			// 현재 설정되어 있는 비디오 정보 얻어오기
 			capGetVideoFormat(m_hWndCap, &m_BmInfo, sizeof(BITMAPINFO));
 
-			// 320*240의 24비트 bitmap으로 지정
-		
+			// 320*240, 24bit bitmap
 			m_BmInfo.bmiHeader.biBitCount = 24;
 			m_BmInfo.bmiHeader.biCompression = 0;
 			m_BmInfo.bmiHeader.biWidth = 320;
 			m_BmInfo.bmiHeader.biHeight = 240;
 			m_BmInfo.bmiHeader.biSizeImage = m_BmInfo.bmiHeader.biWidth * m_BmInfo.bmiHeader.biHeight * 3;
 		
-			// 설정된 비디오 정보를 지정
 			capSetVideoFormat(m_hWndCap, &m_BmInfo, sizeof(BITMAPINFO));
 
 			capOverlay(m_hWndCap, false);
@@ -234,7 +229,7 @@ void CApplication::OnMotionRun()
 		}
 
 		SetTimer(MOTION, 30, NULL);
-		SetDlgItemText(IDC_MOTION_RUN, _T("중지"));
+		SetDlgItemText(IDC_MOTION_RUN, _T("Stop"));
 
 		m_bMotionRun = TRUE;
 	}
@@ -244,7 +239,7 @@ void CApplication::OnMotionRun()
 
 		capDriverDisconnect(m_hWndCap);
 
-		SetDlgItemText(IDC_MOTION_RUN, _T("실행"));
+		SetDlgItemText(IDC_MOTION_RUN, _T("Run"));
 
 		m_bMotionRun = FALSE;
 	}
@@ -340,7 +335,7 @@ void CApplication::VehicleProc()
 	{
 		KillTimer(VEHICLE);
 
-		SetDlgItemText(IDC_VEHICLE_RUN, _T("실행"));
+		SetDlgItemText(IDC_VEHICLE_RUN, _T("Run"));
 
 		m_bVehicleRun = FALSE;
 
@@ -405,7 +400,7 @@ void CApplication::AviVehicleProc()
 
 		KillTimer(AVI_VEHICLE);
 
-		SetDlgItemText(IDC_LPR_RUN, _T("실행"));
+		SetDlgItemText(IDC_LPR_RUN, _T("Run"));
 
 		m_bAviVehicleRun = FALSE;
 
@@ -516,7 +511,7 @@ void CApplication::OnFolderSel()
 
 void CApplication::OnFileSel() 
 {
-	CFileDialog dlg(TRUE, _T("*.avi"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("AVI 파일(*.avi)|*.avi||"));
+	CFileDialog dlg(TRUE, _T("*.avi"), NULL, OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("AVI Files(*.avi)|*.avi||"));
 	
 	if(dlg.DoModal() == IDOK) 
 	{
@@ -607,7 +602,7 @@ void CApplication::OnBpnExRun()
 		nTrainCnt = 0;
 		SetTimer(BPN_EX, 5, NULL);
 
-		SetDlgItemText(IDC_BPN_EX_RUN, _T("중지"));
+		SetDlgItemText(IDC_BPN_EX_RUN, _T("Stop"));
 
 		m_bBpnRun = TRUE;
 	}
@@ -618,7 +613,7 @@ void CApplication::OnBpnExRun()
 		delete m_pBpn;
 		m_pBpn = NULL;
 
-		SetDlgItemText(IDC_BPN_EX_RUN, _T("실행"));
+		SetDlgItemText(IDC_BPN_EX_RUN, _T("Run"));
 
 		m_bBpnRun = FALSE;
 	}

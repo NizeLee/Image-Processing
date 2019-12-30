@@ -5,8 +5,8 @@
 #include "ImageProcessing.h"
 #include "Chap4.h"
 
-#include "Image.h"		// 추가
-#include  "Image4Win.h"
+#include "Image.h"	
+#include "Image4Win.h"
 
 #include <cmath>
 
@@ -76,13 +76,11 @@ void CChap4::OnDct()
 
 	int nBlockSize = GetDlgItemInt(IDC_BLOCK_SIZE);
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputDouble = dmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	DCT2D(ImageGray, OutputDouble, nW, nH, nBlockSize);
@@ -109,13 +107,11 @@ void CChap4::OnCompression()
 
 	int nBlockSize = GetDlgItemInt(IDC_BLOCK_SIZE);
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	Compression(ImageGray, OutputGray, nW, nH);

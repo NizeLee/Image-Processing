@@ -7,10 +7,10 @@
 #include "ImageProcessingDoc.h"
 #include "ImageProcessingView.h"
 
-#include "MainFrm.h"		// 추가
+#include "MainFrm.h"		
 
 #include "Image.h"
-#include  "Image4Win.h"
+#include "Image4Win.h"
 
 #include <cmath>
 
@@ -66,7 +66,6 @@ END_MESSAGE_MAP()
 
 CImageProcessingView::CImageProcessingView()
 {
-	// 필요한 비트맵 헤더 정보 초기화
 	m_BmiHeader.biSize = sizeof(BITMAPINFOHEADER);
 	m_BmiHeader.biPlanes = 1;
 	m_BmiHeader.biBitCount = 24;
@@ -76,7 +75,6 @@ CImageProcessingView::CImageProcessingView()
 	m_BmiHeader.biClrUsed = 0;
 	m_BmiHeader.biClrImportant = 0;
 
-	// 현재 영상 번호 초기화
 	m_nCurrentImage = -1;
 
 	m_nSelectRegion = 0;
@@ -110,17 +108,14 @@ void CImageProcessingView::OnDraw(CDC* pDC)
 	CImageProcessingDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	// 영상 출력
 	int i;
 	for(i = 0 ; i < pDoc->m_nImageCnt ; i++)
 	{
-		// 필요한 비트맵 해더 정보 수정
 		m_BmiHeader.biWidth = pDoc->m_Image[i].nW;
 		m_BmiHeader.biHeight = pDoc->m_Image[i].nH;
 
 		m_BmiHeader.biSizeImage = GetBmp24Size(pDoc->m_Image[i].nW, pDoc->m_Image[i].nH);
 
-		// 영상 출력
 		StretchDIBits(pDC->m_hDC,
 			pDoc->m_Image[i].nPosX, pDoc->m_Image[i].nPosY,
 			m_BmiHeader.biWidth,
@@ -233,7 +228,6 @@ void CImageProcessingView::OnInitialUpdate()
 
 	CSize sizeTotal;
 	
-	// 스크롤뷰의 크기 지정
 	sizeTotal.cx = 1024*20;
 	sizeTotal.cy = 768*20;
 	SetScrollSizes(MM_TEXT, sizeTotal);
@@ -284,7 +278,6 @@ CImageProcessingDoc* CImageProcessingView::GetDocument() // non-debug version is
 /////////////////////////////////////////////////////////////////////////////
 // CImageProcessingView message handlers
 
-// point 좌표를 포함하는 영상을 현재 영상으로 지정
 int CImageProcessingView::GetCurrentImageRect(CPoint point)
 {
 	CImageProcessingDoc* pDoc = GetDocument();
@@ -294,14 +287,11 @@ int CImageProcessingView::GetCurrentImageRect(CPoint point)
 
 	for(int i = pDoc->m_nImageCnt-1 ; i >= 0 ; i--)
 	{
-		// i번째 영상의 외곽 사각형
 		CRect rt(pDoc->m_Image[i].nPosX, pDoc->m_Image[i].nPosY, 
 			pDoc->m_Image[i].nPosX + pDoc->m_Image[i].nW, pDoc->m_Image[i].nPosY+pDoc->m_Image[i].nH);
 
-		// 사각형에 point 포함 여부 확인
 		if(rt.PtInRect(CurrentPoint)) 
 		{
-			// point를 포함하는 영상을 가장 마지막 영상으로 지정
 			ImageInfo SaveImage = pDoc->m_Image[i];
 			for(int k = i ; k < pDoc->m_nImageCnt - 1 ; k++)
 				pDoc->m_Image[k] = pDoc->m_Image[k+1];
@@ -312,11 +302,9 @@ int CImageProcessingView::GetCurrentImageRect(CPoint point)
 		}
 	}
 
-	// 영상을 찾지 못함
 	return -1;
 }
 
-// point 좌표와 (좌상) 위치가 동일한 영상을 현재 영상으로 지정
 int CImageProcessingView::GetCurrentImagePos(CPoint point)
 {
 	CImageProcessingDoc* pDoc = GetDocument();
@@ -326,12 +314,10 @@ int CImageProcessingView::GetCurrentImagePos(CPoint point)
 
 	for(int i = pDoc->m_nImageCnt-1 ; i >= 0 ; i--)
 	{
-		// i번째 영상의 (좌상)위치
 		CPoint pt(pDoc->m_Image[i].nPosX, pDoc->m_Image[i].nPosY);
 
 		if(CurrentPoint == pt) 
 		{
-			// point와 (좌상)위치가 동일 한 영상을 마지막 영상으로 지정
 			ImageInfo SaveImage = pDoc->m_Image[i];
 			for(int k = i ; k < pDoc->m_nImageCnt - 1 ; k++)
 				pDoc->m_Image[k] = pDoc->m_Image[k+1];
@@ -342,17 +328,15 @@ int CImageProcessingView::GetCurrentImagePos(CPoint point)
 		}
 	}
 
-	// 영상을 찾지 못함
 	return -1;
 }
 
-// 마지막 영상의 폭, 높이, 위치 읽기
 bool CImageProcessingView::GetCurrentImageInfo(int *pW, int *pH, int *pPosX, int *pPosY, int nIndex) 
 {
 	CImageProcessingDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	int nCurrentImage = pDoc->m_nImageCnt-1-nIndex;	// 마지막 영상-nIndex
+	int nCurrentImage = pDoc->m_nImageCnt-1-nIndex;	
 
 	if(nCurrentImage < 0) return false;
 
@@ -364,13 +348,12 @@ bool CImageProcessingView::GetCurrentImageInfo(int *pW, int *pH, int *pPosX, int
 	return true;
 }
 
-// 마지막 영상을 2차원 회색조 정보로 읽기
 bool CImageProcessingView::GetCurrentImageGray(BYTE **ImageGray, int nIndex)
 {
 	CImageProcessingDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	int nCurrentImage = pDoc->m_nImageCnt-1-nIndex;	// 마지막 영상-nIndex
+	int nCurrentImage = pDoc->m_nImageCnt-1-nIndex;	
 
 	if(nCurrentImage < 0) return false;
 
@@ -386,14 +369,12 @@ bool CImageProcessingView::GetCurrentImageGray(BYTE **ImageGray, int nIndex)
 	return true;
 }
 
-// 2차원 회색조 영상을 출력
 bool CImageProcessingView::DisplayCimage2D(BYTE **ImageGray, int nW, int nH, int nPosX, int nPosY, 
 	bool bErase, bool bDelete, int Rate)
 {
 	CImageProcessingDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	// bDelete가 true이면 nPosX, nPosY위치의 이전 영상을 제거
 	if(bDelete)
 	{
 		int nCurrentImage = GetCurrentImagePos(CPoint(nPosX, nPosY)-GetScrollPosition());
@@ -405,7 +386,7 @@ bool CImageProcessingView::DisplayCimage2D(BYTE **ImageGray, int nW, int nH, int
 		}
 	}
 
-	int nCurrentImage = pDoc->m_nImageCnt;		// 새로운 영상(출력 영상)
+	int nCurrentImage = pDoc->m_nImageCnt;	
 
 	if(nCurrentImage >= MAX_IMAGE) return false;
 
@@ -435,13 +416,12 @@ bool CImageProcessingView::DisplayCimage2D(BYTE **ImageGray, int nW, int nH, int
 	return true;
 }
 
-// 마지막 영상을 2차원 컬러 정보로 읽기
 bool CImageProcessingView::GetCurrentImageColor(BYTE **ImageRed, BYTE **ImageGreen, BYTE **ImageBlue, int nIndex)
 {
 	CImageProcessingDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	int nCurrentImage = pDoc->m_nImageCnt-1-nIndex;	// 마지막 영상-nIndex
+	int nCurrentImage = pDoc->m_nImageCnt-1-nIndex;	
 
 	if(nCurrentImage < 0) return false;
 
@@ -465,7 +445,7 @@ bool CImageProcessingView::GetCurrentImage1DColor(BYTE *Image1D, int nIndex)
 	CImageProcessingDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	int nCurrentImage = pDoc->m_nImageCnt-1-nIndex;	// 마지막 영상-nIndex
+	int nCurrentImage = pDoc->m_nImageCnt-1-nIndex;	
 
 	if(nCurrentImage < 0) return false;
 
@@ -480,7 +460,6 @@ bool CImageProcessingView::DisplayCimage1D(BYTE *Image1D, int nW, int nH,
 	CImageProcessingDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	// bDelete가 true이면 nPosX, nPosY위치의 이전 영상을 제거
 	if(bDelete)
 	{
 		int nCurrentImage = GetCurrentImagePos(CPoint(nPosX, nPosY)-GetScrollPosition());
@@ -492,7 +471,7 @@ bool CImageProcessingView::DisplayCimage1D(BYTE *Image1D, int nW, int nH,
 		}
 	}
 
-	int nCurrentImage = pDoc->m_nImageCnt;	// 새로운 영상(출력 영상)
+	int nCurrentImage = pDoc->m_nImageCnt;
 
 	if(nCurrentImage >= MAX_IMAGE) return false;
 
@@ -527,14 +506,12 @@ bool CImageProcessingView::DisplayCimage1D(BYTE *Image1D, int nW, int nH,
 	return true;
 }
 	
-// 2차원 컬러 영상을 출력
 bool CImageProcessingView::DisplayCimage2DColor(BYTE **ImageRed, BYTE **ImageGreen, BYTE **ImageBlue, int nW, int nH, 
 	int nPosX, int nPosY, bool bErase, bool bDelete, int Rate)
 {
 	CImageProcessingDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	// bDelete가 true이면 nPosX, nPosY위치의 이전 영상을 제거
 	if(bDelete)
 	{
 		int nCurrentImage = GetCurrentImagePos(CPoint(nPosX, nPosY)-GetScrollPosition());
@@ -546,7 +523,7 @@ bool CImageProcessingView::DisplayCimage2DColor(BYTE **ImageRed, BYTE **ImageGre
 		}
 	}
 
-	int nCurrentImage = pDoc->m_nImageCnt;	// 새로운 영상(출력 영상)
+	int nCurrentImage = pDoc->m_nImageCnt;
 
 	if(nCurrentImage >= MAX_IMAGE) return false;
 
@@ -582,7 +559,6 @@ bool CImageProcessingView::DisplayIimage2D(int **ImageInt, int nW, int nH, int n
 	CImageProcessingDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	// bDelete가 true이면 nPosX, nPosY위치의 이전 영상을 제거
 	if(bDelete)
 	{
 		int nCurrentImage = GetCurrentImagePos(CPoint(nPosX, nPosY)-GetScrollPosition());
@@ -594,7 +570,7 @@ bool CImageProcessingView::DisplayIimage2D(int **ImageInt, int nW, int nH, int n
 		}
 	}
 
-	int nCurrentImage = pDoc->m_nImageCnt;		// 새로운 영상(출력 영상)
+	int nCurrentImage = pDoc->m_nImageCnt;		
 
 	if(nCurrentImage >= MAX_IMAGE) return false;
 
@@ -647,7 +623,6 @@ bool CImageProcessingView::DisplayDimage2D(double **ImageDouble, int nW, int nH,
 	CImageProcessingDoc* pDoc = GetDocument();
 	ASSERT_VALID(pDoc);
 
-	// bDelete가 true이면 nPosX, nPosY위치의 이전 영상을 제거
 	if(bDelete)
 	{
 		int nCurrentImage = GetCurrentImagePos(CPoint(nPosX, nPosY)-GetScrollPosition());
@@ -659,7 +634,7 @@ bool CImageProcessingView::DisplayDimage2D(double **ImageDouble, int nW, int nH,
 		}
 	}
 
-	int nCurrentImage = pDoc->m_nImageCnt;		// 새로운 영상(출력 영상)
+	int nCurrentImage = pDoc->m_nImageCnt;		
 
 	if(nCurrentImage >= MAX_IMAGE) return false;
 
@@ -843,7 +818,6 @@ void CImageProcessingView::GetViewRegionSelected(UINT nFlags, CPoint point)
 	}
 }
 
-// 왼쪽 마우스 버튼의 누름에 대한 핸들러
 void CImageProcessingView::OnLButtonDown(UINT nFlags, CPoint point) 
 {
 	CPoint CurrentScrollPoint= GetScrollPosition();
@@ -895,20 +869,18 @@ void CImageProcessingView::OnLButtonDown(UINT nFlags, CPoint point)
 		m_rtSelectRegion.left = point.x;
 		m_rtSelectRegion.top = point.y;
 		m_PrevRect = CRect(0, 0, 0, 0);
-		SetCapture();	// 마우스 캡쳐
+		SetCapture();	
 	}
 	else if(m_nCurrentImage > -1)
 	{
-		// 최초 클릭한 위치 저장
 		m_SaveStartPoint = point;
 		m_PrevRect = CRect(0, 0, 0, 0);
-		SetCapture();	// 마우스 캡쳐
+		SetCapture();	
 	}
 	
 	CScrollView::OnLButtonDown(nFlags, point);
 }
 
-// 왼쪽 마우스 버튼의 놓음에 대한 핸들러
 void CImageProcessingView::OnLButtonUp(UINT nFlags, CPoint point) 
 {
 	CImageProcessingDoc* pDoc = GetDocument();
@@ -1180,11 +1152,10 @@ void CImageProcessingView::OnLButtonUp(UINT nFlags, CPoint point)
 		SelOperation();
 
 		m_nSelectRegion = 0;
-		ReleaseCapture();	// 마우스 캡쳐 해제
+		ReleaseCapture();	
 	}
 	else if(m_nCurrentImage > -1)
 	{
-		// 영상 이동
 		if(!m_bEditRegionState)
 		{
 			pDoc->m_Image[m_nCurrentImage].nPosX += point.x - m_SaveStartPoint.x;
@@ -1193,14 +1164,13 @@ void CImageProcessingView::OnLButtonUp(UINT nFlags, CPoint point)
 
 		m_nCurrentImage = -1;
 
-		ReleaseCapture();	// 마우스 캡쳐 해제
-		Invalidate();		// 다시 그리기
+		ReleaseCapture();	
+		Invalidate();		
 	}
 	
 	CScrollView::OnLButtonUp(nFlags, point);
 }
 
-// 마우스 이동에 대한 핸들러
 void CImageProcessingView::OnMouseMove(UINT nFlags, CPoint point) 
 {
 	CImageProcessingDoc* pDoc = GetDocument();
@@ -1502,7 +1472,6 @@ void CImageProcessingView::OnMouseMove(UINT nFlags, CPoint point)
 		dc.SetROP2(R2_NOT);
 		pOldBrush = (CBrush *)dc.SelectStockObject(NULL_BRUSH);
 		
-		// 이동 사각형 출력
 		dc.Rectangle(m_PrevRect);
 		dc.Rectangle(rt);
 
@@ -1514,7 +1483,6 @@ void CImageProcessingView::OnMouseMove(UINT nFlags, CPoint point)
 	CScrollView::OnMouseMove(nFlags, point);
 }
 
-// 왼쪽 마우스 버튼의 더블 클릭에 대한 핸들러
 void CImageProcessingView::OnLButtonDblClk(UINT nFlags, CPoint point) 
 {
 	CImageProcessingDoc* pDoc = GetDocument();
@@ -1545,9 +1513,8 @@ void CImageProcessingView::OnLButtonDblClk(UINT nFlags, CPoint point)
 			Invalidate();	
 		}	
 	}
-	else if(m_nCurrentImage > -1 && !m_bEditRegionState) // point를 포함하는 사각형이 있다면
+	else if(m_nCurrentImage > -1 && !m_bEditRegionState) 
 	{
-		// 나머지 영상들 제거
 		ImageInfo SaveImage = pDoc->m_Image[m_nCurrentImage];
 		for(int i = 0 ; i < pDoc->m_nImageCnt ; i++)
 			if(i != m_nCurrentImage) delete [] pDoc->m_Image[i].Image1D;
@@ -1563,43 +1530,35 @@ void CImageProcessingView::OnLButtonDblClk(UINT nFlags, CPoint point)
 	CScrollView::OnLButtonDblClk(nFlags, point);
 }
 
-// 회색조 복사
 void CImageProcessingView::OnGrayDuplicate() 
 {
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
-	// 회색조 영상 출력
 	DisplayCimage2D(ImageGray, nW, nH, nPosX+nW, nPosY);
 
 	free_cmatrix(ImageGray, nH, nW);
 }
 
-// 컬러 복사
 void CImageProcessingView::OnColorDuplicate() 
 {
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageRed, **ImageGreen, **ImageBlue;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageRed = cmatrix(nH, nW);
 	ImageGreen = cmatrix(nH, nW);
 	ImageBlue = cmatrix(nH, nW);
 
-	// 컬러 영상 읽기
 	GetCurrentImageColor(ImageRed, ImageGreen, ImageBlue);
 
-	// 컬러 영상 출력
 	DisplayCimage2DColor(ImageRed, ImageGreen, ImageBlue, nW, nH, nPosX+nW, nPosY);
 
 	free_cmatrix(ImageRed, nH, nW);	
@@ -1646,7 +1605,6 @@ void CImageProcessingView::OnScaleX2()
 	BYTE **ImageGray, **ImageGrayG, **ImageGrayB;
 	BYTE **OutputGray, **OutputGrayG, **OutputGrayB;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
@@ -1657,7 +1615,6 @@ void CImageProcessingView::OnScaleX2()
 	OutputGrayG = cmatrix(nH*2, nW*2);
 	OutputGrayB = cmatrix(nH*2, nW*2);
 
-	// 회색조 영상 읽기
 	GetCurrentImageColor(ImageGray, ImageGrayG, ImageGrayB);
 
 	int x, y;
@@ -1669,7 +1626,6 @@ void CImageProcessingView::OnScaleX2()
 			OutputGrayB[y][x] = ImageGrayB[y/2][x/2];
 		}
 
-	// 확대된 영상 출력
 	DisplayCimage2DColor(OutputGray, OutputGrayG, OutputGrayB, nW*2, nH*2, nPosX+nW, nPosY);
 
 	free_cmatrix(ImageGray, nH, nW);
@@ -1686,7 +1642,6 @@ void CImageProcessingView::OnScaleHalf()
 	BYTE **ImageGray, **ImageGrayG, **ImageGrayB;
 	BYTE **OutputGray, **OutputGrayG, **OutputGrayB;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
@@ -1696,7 +1651,6 @@ void CImageProcessingView::OnScaleHalf()
 	OutputGrayG = cmatrix(nH/2, nW/2);
 	OutputGrayB = cmatrix(nH/2, nW/2);
 
-	// 회색조 영상 읽기
 	GetCurrentImageColor(ImageGray, ImageGrayG, ImageGrayB);
 
 	int x, y;
@@ -1708,7 +1662,7 @@ void CImageProcessingView::OnScaleHalf()
 			OutputGrayB[y][x] = ImageGrayB[y*2][x*2];
 		}
 
-	// 축소된 영상 출력
+
 	DisplayCimage2DColor(OutputGray, OutputGrayG, OutputGrayB, nW/2, nH/2, nPosX+nW, nPosY);
 
 	free_cmatrix(ImageGray, nH, nW);
@@ -2219,7 +2173,6 @@ void CImageProcessingView::OnImageInfo()
 {
 	int nW, nH, nPosX, nPosY;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	CString Buf;

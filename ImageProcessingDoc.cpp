@@ -32,13 +32,11 @@ END_MESSAGE_MAP()
 
 CImageProcessingDoc::CImageProcessingDoc()
 {
-	// 현재 창의 영상을 초기에 0으로 지정
 	m_nImageCnt = 0;
 }
 
 CImageProcessingDoc::~CImageProcessingDoc()
 {
-	// 현재 창의 영상에 대한 동적 메모리를 해제
 	for(int i = 0 ; i < m_nImageCnt ; i++)
 		delete [] m_Image[i].Image1D;
 }
@@ -94,7 +92,6 @@ BOOL CImageProcessingDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	if (!CDocument::OnOpenDocument(lpszPathName))
 		return FALSE;
 
-	// 창에 표시할 영상 확인
 	if(m_nImageCnt >= MAX_IMAGE) return FALSE;
 
 	CString FileName = lpszPathName;
@@ -104,10 +101,8 @@ BOOL CImageProcessingDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	int len = WideCharToMultiByte(CP_ACP, 0, lpszPathName, -1, NULL, NULL, NULL, NULL);
 	WideCharToMultiByte(CP_ACP, 0, lpszPathName, -1, mbcsFileName, len, NULL, NULL);
 
-	// 비트맵 영상
 	if(FileName.Right(4) == _T(".BMP"))
 	{
-		// 영상 읽기
 		m_Image[m_nImageCnt].Image1D = ReadBmp(mbcsFileName, &m_Image[m_nImageCnt].nW, &m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return FALSE;
@@ -119,7 +114,6 @@ BOOL CImageProcessingDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	}
 	else if(FileName.Right(4) == _T(".PNG"))
 	{
-		// 영상 읽기
 		m_Image[m_nImageCnt].Image1D = ReadPng(mbcsFileName, &m_Image[m_nImageCnt].nW, &m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return FALSE;
@@ -131,7 +125,6 @@ BOOL CImageProcessingDoc::OnOpenDocument(LPCTSTR lpszPathName)
 	}
 	else if(FileName.Right(4) == _T(".PPM"))
 	{
-		// 영상 읽기
 		m_Image[m_nImageCnt].Image1D = ReadPpm(mbcsFileName, &m_Image[m_nImageCnt].nW, &m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return FALSE;
@@ -141,13 +134,11 @@ BOOL CImageProcessingDoc::OnOpenDocument(LPCTSTR lpszPathName)
 
 		m_nImageCnt++;
 	}
-	// 256*256 영상
 	else if(FileName.Right(4) == _T(".256"))
 	{
 		m_Image[m_nImageCnt].nW = 256;
 		m_Image[m_nImageCnt].nH = 256;
 
-		// 영상 읽기
 		m_Image[m_nImageCnt].Image1D = ReadRaw(mbcsFileName, m_Image[m_nImageCnt].nW, m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return FALSE;
@@ -157,13 +148,11 @@ BOOL CImageProcessingDoc::OnOpenDocument(LPCTSTR lpszPathName)
 
 		m_nImageCnt++;
 	}
-	// 320*240 영상
 	else if(FileName.Right(4) == _T(".320"))
 	{
 		m_Image[m_nImageCnt].nW = 320;
 		m_Image[m_nImageCnt].nH = 240;
 
-		// 영상 읽기 
 		m_Image[m_nImageCnt].Image1D = ReadRaw(mbcsFileName, m_Image[m_nImageCnt].nW, m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return FALSE;
@@ -173,10 +162,8 @@ BOOL CImageProcessingDoc::OnOpenDocument(LPCTSTR lpszPathName)
 
 		m_nImageCnt++;
 	}
-	// PCX 영상
 	else if(FileName.Right(4) == _T(".PCX"))
 	{
-		// 영상 읽기 
 		m_Image[m_nImageCnt].Image1D = ReadPcx(mbcsFileName, &m_Image[m_nImageCnt].nW, &m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return FALSE;
@@ -186,10 +173,8 @@ BOOL CImageProcessingDoc::OnOpenDocument(LPCTSTR lpszPathName)
 
 		m_nImageCnt++;
 	}
-	// JPEG 영상
 	else if(FileName.Right(4) == _T(".JPG"))
 	{
-		// 영상 읽기 
 		m_Image[m_nImageCnt].Image1D = ReadJpeg(mbcsFileName, &m_Image[m_nImageCnt].nW, &m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return FALSE;
@@ -207,13 +192,11 @@ BOOL CImageProcessingDoc::OnOpenDocument(LPCTSTR lpszPathName)
 
 BOOL CImageProcessingDoc::OnSaveDocument(LPCTSTR lpszPathName) 
 {
-	// 창에 표시된 영상 확인
 	if(m_nImageCnt <= 0) return FALSE;
 
 	CString FileName = lpszPathName;
 	FileName.MakeUpper();
 
-	// 비트맵 영상 저장
 	if(FileName.Right(4) == _T(".BMP"))
 	{
 		char mbcsFileName[MAX_PATH];
@@ -222,7 +205,6 @@ BOOL CImageProcessingDoc::OnSaveDocument(LPCTSTR lpszPathName)
 
 		return SaveBmp(mbcsFileName, m_Image[m_nImageCnt-1].Image1D, m_Image[m_nImageCnt-1].nW, m_Image[m_nImageCnt-1].nH);
 	}
-	// JPEG 영상 저장
 	else if(FileName.Right(4) == _T(".JPG"))
 	{
 		char mbcsFileName[MAX_PATH];
@@ -254,7 +236,6 @@ JPEG Files(*.jpg)|*.jpg|PNG Files(*.png)|*.png|RAW Files(*.320, *.256)|\
 
 void CImageProcessingDoc::FileOpenCur(CString FilePathName) 
 {
-	// 창에 표시할 영상 확인
 	if(m_nImageCnt >= MAX_IMAGE) return;
 
 	CString FileName = FilePathName;
@@ -264,10 +245,8 @@ void CImageProcessingDoc::FileOpenCur(CString FilePathName)
 	int len = WideCharToMultiByte(CP_ACP, 0, FileName, -1, NULL, NULL, NULL, NULL);
 	WideCharToMultiByte(CP_ACP, 0, FileName, -1, mbcsFileName, len, NULL, NULL);
 
-	// 비트맵 영상
 	if(FileName.Right(4) == _T(".BMP"))
 	{
-		// 영상 읽기
 		m_Image[m_nImageCnt].Image1D = ReadBmp(mbcsFileName, &m_Image[m_nImageCnt].nW, &m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return;
@@ -279,7 +258,6 @@ void CImageProcessingDoc::FileOpenCur(CString FilePathName)
 	}
 	else if(FileName.Right(4) == _T(".PNG"))
 	{
-		// 영상 읽기
 		m_Image[m_nImageCnt].Image1D = ReadPng(mbcsFileName, &m_Image[m_nImageCnt].nW, &m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return;
@@ -291,7 +269,6 @@ void CImageProcessingDoc::FileOpenCur(CString FilePathName)
 	}
 	else if(FileName.Right(4) == _T(".PPM"))
 	{
-		// 영상 읽기
 		m_Image[m_nImageCnt].Image1D = ReadPpm(mbcsFileName, &m_Image[m_nImageCnt].nW, &m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return;
@@ -301,13 +278,11 @@ void CImageProcessingDoc::FileOpenCur(CString FilePathName)
 
 		m_nImageCnt++;
 	}
-	// 256*256 영상
 	else if(FileName.Right(4) == _T(".256"))
 	{
 		m_Image[m_nImageCnt].nW = 256;
 		m_Image[m_nImageCnt].nH = 256;
 
-		// 영상 읽기
 		m_Image[m_nImageCnt].Image1D = ReadRaw(mbcsFileName, m_Image[m_nImageCnt].nW, m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return;
@@ -317,13 +292,11 @@ void CImageProcessingDoc::FileOpenCur(CString FilePathName)
 
 		m_nImageCnt++;
 	}
-	// 320*240 영상
 	else if(FileName.Right(4) == _T(".320"))
 	{
 		m_Image[m_nImageCnt].nW = 320;
 		m_Image[m_nImageCnt].nH = 240;
 
-		// 영상 읽기 
 		m_Image[m_nImageCnt].Image1D = ReadRaw(mbcsFileName, m_Image[m_nImageCnt].nW, m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return;
@@ -333,10 +306,8 @@ void CImageProcessingDoc::FileOpenCur(CString FilePathName)
 
 		m_nImageCnt++;
 	}
-	// PCX 영상
 	else if(FileName.Right(4) == _T(".PCX"))
 	{
-		// 영상 읽기 
 		m_Image[m_nImageCnt].Image1D = ReadPcx(mbcsFileName, &m_Image[m_nImageCnt].nW, &m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return;
@@ -346,10 +317,8 @@ void CImageProcessingDoc::FileOpenCur(CString FilePathName)
 
 		m_nImageCnt++;
 	}
-	// JPEG 영상
 	else if(FileName.Right(4) == _T(".JPG"))
 	{
-		// 영상 읽기 
 		m_Image[m_nImageCnt].Image1D = ReadJpeg(mbcsFileName, &m_Image[m_nImageCnt].nW, &m_Image[m_nImageCnt].nH);
 
 		if(m_Image[m_nImageCnt].Image1D == NULL) return;

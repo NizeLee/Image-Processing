@@ -14,25 +14,25 @@
 class CBpn  
 {
 private:
-	int nLayerCnt;		// 층의 개수: 입력 + 출력 + 은닉
-	int *NodeCnt;		// 층당 노드 수: NodeCnt[층번호]
-	double **Node;		// 노드: Node[층번호][노드 번호]
-	double ***Weight;	// 가중치: Weight[층번호][노드번호1][노드번호2]
-						// 노드번호1은 현재 층의 노드 번호, 노드 번호2는 이전 층의 노드 번호
-	double **Delta;		// delta: Delta[층번호][노드번호]
-	double dGain;		// 이득
+	int nLayerCnt;		// the # of Layers: Input + Hidden + Output
+	int *NodeCnt;		// the # of Nodes: NodeCnt[Layer]
+	double **Node;		// Nodes: Node[Layer][Node]
+	double ***Weight;	// Weights: Weight[Layer][Node 1][Node 2]
+						// Node 1: Current layer, Node 2: Previous layer
+	double **Delta;		// delta: Delta[Layer][Node]
+	double dGain;		// Learning rate
 
 public:
-	CBpn(int nLayerCntInput, int *NodeCntInput, double dGainInput);	// 생성자: 층수, 노드수, 이득 입력 + 메모리 할당
+	CBpn(int nLayerCntInput, int *NodeCntInput, double dGainInput);	// Constructor: Layers, Nodes, Learning rate
 
-	static double ActivationFn(double x);				// 활성 함수
-	static double DifferentialActivationFn(double x);	// 활성 함수의 미분
+	static double ActivationFn(double x);				// Activation
+	static double DifferentialActivationFn(double x);	// Differential Activation
 
-	void InitWeight();								// 가중치 초기화
-	int ComputeNet(double *Input);					// 입력에 대한 출력 계산
-	void ComputeDelta(double *Output);				// Delta 계산
-	void UpdateWeight();							// 가중치 갱신
-	int Train(double *Input, double *Output);		// 훈련: ComputeNet + ComputeDelta + UpdateDelta
+	void InitWeight();								// Weight initialization
+	int ComputeNet(double *Input);					// Compute network
+	void ComputeDelta(double *Output);				// Compute delta
+	void UpdateWeight();							// Updage weights
+	int Train(double *Input, double *Output);		// Training: ComputeNet + ComputeDelta + UpdateDelta
 	virtual ~CBpn();
 
 };

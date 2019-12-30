@@ -6,12 +6,12 @@
 #include "stdafx.h"
 #include "ImageProcessing.h"
 
-#include "MainFrm.h"		// 추가
-#include "ChildFrm.h"		// 추가
-#include "ImageProcessingDoc.h"		// 추가
-#include "ImageProcessingView.h"	// 추가
+#include "MainFrm.h"		
+#include "ChildFrm.h"		
+#include "ImageProcessingDoc.h"
+#include "ImageProcessingView.h"	
 
-#include <cmath>			// 추가
+#include <cmath>			
 
 
 int IsPtInsidePolygon(CIpPoint *polygon, int N, CIpPoint p)
@@ -44,7 +44,6 @@ int IsPtInsidePolygon(CIpPoint *polygon, int N, CIpPoint p)
 		return true;
 }
 
-// 2차원 메모리 할당
 unsigned char **cmatrix(int nH, int nW) {
 	unsigned char **Temp;
 	
@@ -55,7 +54,6 @@ unsigned char **cmatrix(int nH, int nW) {
 	return Temp;
 }
 
-// 2차원 메모리 해제
 void free_cmatrix(unsigned char **Image, int nH, int nW) {
 	for(int y = 0 ; y < nH ; y++)
 		delete [] Image[y];
@@ -63,7 +61,6 @@ void free_cmatrix(unsigned char **Image, int nH, int nW) {
 	delete [] Image;
 }
 
-// 2차원 메모리 할당
 int **imatrix(int nH, int nW) {
 	int **Temp;
 	
@@ -74,7 +71,6 @@ int **imatrix(int nH, int nW) {
 	return Temp;
 }
 
-// 2차원 메모리 해제
 void free_imatrix(int **Image, int nH, int nW) {
 	for(int y = 0 ; y < nH ; y++)
 		delete [] Image[y];
@@ -82,7 +78,6 @@ void free_imatrix(int **Image, int nH, int nW) {
 	delete [] Image;
 }
 
-// 2차원 메모리 할당
 double **dmatrix(int nH, int nW) {
 	double **Temp;
 	
@@ -93,7 +88,6 @@ double **dmatrix(int nH, int nW) {
 	return Temp;
 }
 
-// 2차원 메모리 해제
 void free_dmatrix(double **Image, int nH, int nW) {
 	for(int y = 0 ; y < nH ; y++)
 		delete [] Image[y];
@@ -101,12 +95,10 @@ void free_dmatrix(double **Image, int nH, int nW) {
 	delete [] Image;
 }
 
-// 24비트 비트맵 영상의 크기 계산
 int GetBmp24Size(int nW, int nH) {
 	return (nW*3+3)/4*4 * nH;
 }
 
-// 24비트 비트맵 영상의 데이터 위치를 계산
 int GetBmp24Pos(int nW, int nH, int x, int y) {
 	return (nW*3+3)/4*4 * (nH-1-y) + x*3;
 }
@@ -267,7 +259,6 @@ typedef struct tagRGBQUAD_ {
 
 #define BI_RGB_        0L
 
-// 비트맵 파일 읽기
 unsigned char *ReadBmp(char *FileName, int *pW, int *pH) {
 	BITMAPFILEHEADER_ bmiFileHeader;
 	BITMAPINFOHEADER_ bmiHeader;
@@ -275,40 +266,31 @@ unsigned char *ReadBmp(char *FileName, int *pW, int *pH) {
 	FILE *fp;
 	int nColors;
 	
-	// 파일 열기
 	fopen_s(&fp, FileName, "rb");
-	// 파일 열기 실패
+
 	if(!fp) return NULL;
 
-	// 파일 헤더 정보 읽기
 	fread(&bmiFileHeader, sizeof(BITMAPFILEHEADER_), 1, fp);
 
-	// 식별자 인식
 	if(bmiFileHeader.bfType != 'M'*0x0100 + 'B') {
 		fclose(fp);
 		return NULL;
 	}
 
-	// 비트맵 정보 헤더 읽기
 	fread(&bmiHeader, sizeof(BITMAPINFOHEADER_), 1, fp);
 	
-
-	// 압축 여부 확인 - 압축되어 있다면 종료
 	if(bmiHeader.biCompression != BI_RGB_) {
 	    fclose(fp);
 	    return NULL;
 	}
 
-	// 만일 Colors이 0이면 화소당 비트수에 대한 최대 컬러 개수
 	if(bmiHeader.biClrUsed == 0) 
 		nColors = 1 << bmiHeader.biBitCount;
 	else
 		nColors = bmiHeader.biClrUsed;
 
-	// 팔레트 
 	RGBQUAD_ *Palette = NULL;
 
-	// 팔레트 정보 읽기
 	switch (bmiHeader.biBitCount) {
 		case 24:
 			break;
@@ -334,7 +316,6 @@ unsigned char *ReadBmp(char *FileName, int *pW, int *pH) {
 			break;
 	}
 
-	// 비트맵 데이터 위치로 이동
 	fseek(fp, bmiFileHeader.bfOffBits, SEEK_SET);
 
 	*pW = bmiHeader.biWidth;
@@ -342,16 +323,15 @@ unsigned char *ReadBmp(char *FileName, int *pW, int *pH) {
 	
 	unsigned char *Image1D = NULL;
 
-	// 1차원 메모리 할당
 	Image1D = new unsigned char[GetBmp24Size(*pW, *pH)];
 
-	// 24비트 컬러
+	// 24 bits
 	if(bmiHeader.biBitCount == 24)
 		fread(Image1D, sizeof(unsigned char), *pH*((*pW*3+3)/4*4), fp);
 
 	long Row, Col;
 
-	// 1, 4, 8 비트 컬러
+	// 1, 4, 8 bits
 	for(Row = 0 ; Row < bmiHeader.biHeight ; Row++)
 	{
 		if(bmiHeader.biBitCount != 24) 
@@ -374,19 +354,16 @@ unsigned char *ReadBmp(char *FileName, int *pW, int *pH) {
 
 				BitCount -= bmiHeader.biBitCount;
 
-				// 팔레트 인덱스 번호 계산
 				PaletteIndex = (ReadByte >> BitCount) & mask;
 
 				int Pos;
 
-				// 24비트 컬러로 저장
 				Pos = (((*pW*3+3)/4*4) * Row) + Col*3;	
 				Image1D[Pos++] = Palette[PaletteIndex].rgbBlue;
 				Image1D[Pos++] = Palette[PaletteIndex].rgbGreen;
 				Image1D[Pos] = Palette[PaletteIndex].rgbRed;
 			}
 
-			// 윗줄의 위치 결정
 			while (ReadByteCnt&3) 
 			{
 				char temp;
@@ -403,7 +380,6 @@ unsigned char *ReadBmp(char *FileName, int *pW, int *pH) {
 	return Image1D;
 }
 
-// raw 파일 읽기
 unsigned char *ReadRaw(char *FileName, int nW, int nH) {
 	unsigned char *ReadBytes;
 	int x, y, Pos;
@@ -411,16 +387,14 @@ unsigned char *ReadRaw(char *FileName, int nW, int nH) {
 	FILE *fp;
 	
 	fopen_s(&fp, FileName, "rb");
-	// 파일 열기 실패
+
 	if(!fp) return NULL;
 	
 	unsigned char *Image1D;
 
-	// 메모리 할당
 	Image1D = new unsigned char[GetBmp24Size(nW, nH)];
 	ReadBytes = new unsigned char[nW];
 
-	// 1차원 비트맵 구조로 회색조 raw 영상 읽기
 	for(y = 0 ; y < nH ; y++)
 	{
 		fread(ReadBytes, sizeof(unsigned char), nW, fp);
@@ -441,7 +415,6 @@ unsigned char *ReadRaw(char *FileName, int nW, int nH) {
 	return Image1D;
 }
 
-// 비트맵 파일 저장(24비트 컬러)
 bool SaveBmp(char *FileName, unsigned char *Image1D, int nW, int nH) {
 	unsigned long dwBitsSize;
 
@@ -450,7 +423,6 @@ bool SaveBmp(char *FileName, unsigned char *Image1D, int nW, int nH) {
 	size = GetBmp24Size(nW, nH);
 	dwBitsSize = sizeof(BITMAPFILEHEADER_) + sizeof(BITMAPINFOHEADER_) + size;
 
-	// 헤더 정보 저장
 	BITMAPINFOHEADER_ bmiHeader;
 	bmiHeader.biSize = sizeof(BITMAPINFOHEADER_);
 	bmiHeader.biWidth = nW;
@@ -474,17 +446,13 @@ bool SaveBmp(char *FileName, unsigned char *Image1D, int nW, int nH) {
 
 	FILE *fp;
 
-	// 파일 열기
 	fopen_s(&fp, FileName, "wb");
 
-	// 파일 열기 실패
 	if(!fp) return false;
 
-	// 헤더 쓰기
 	fwrite(&bmiFileHeader, sizeof(BITMAPFILEHEADER_), 1, fp);
 	fwrite(&bmiHeader, sizeof(BITMAPINFOHEADER_), 1, fp);
 
-	// 비트맵 정보 쓰기
 	fwrite(Image1D, sizeof(unsigned char), size, fp);
 
 	fclose(fp);
@@ -512,8 +480,7 @@ void Move(unsigned char **ImageGray, unsigned char **OutputGray, int nW, int nH,
 void ScaleX2(unsigned char **ImageGray, unsigned char **OutputGray, int nW, int nH)
 {
 	int x, y;
-	int nOutW = nW*2, nOutH = nH*2;	// nW, nH: 원영상의 폭과 높이
-									// nOutW, nOutH: 변환된 영상의 폭과 높이
+	int nOutW = nW*2, nOutH = nH*2;	
 
 	for(y = 0 ; y < nOutH ; y++)
 		for(x = 0 ; x < nOutW ; x++)
@@ -526,7 +493,7 @@ void Rotate(unsigned char **ImageGray, unsigned char **OutputGray, int nW, int n
 {
 	int x,y;	
 	int xx, yy;
-	double dAng = dDeg * acos(-1.) / 180.;	// 각도를 라디안으로 수정
+	double dAng = dDeg * acos(-1.) / 180.;	
 
 	for(y = 0 ; y < nOutH ; y++)
 		for(x = 0 ; x < nOutW ; x++)
@@ -639,7 +606,7 @@ void MedianFilter(unsigned char **ImageGray, unsigned char **OutputGray, int nW,
 
 					nInsert = ImageGray[yy][xx];
 
-					// 삽입 정렬
+					// Insertion sort
 					if(nIndex == 0) Sort[nIndex] = nInsert;
 					else
 					{
@@ -1383,7 +1350,7 @@ double DFT2D(unsigned char **ImageGray, double **OutputReal, double **OutputImag
 		}
 
 	QueryPerformanceCounter((LARGE_INTEGER*)&end);
-	// 처리 시간(초)
+	
 	double timeDiff = (double)(end - start)/(double)freq; 
 
 	return timeDiff;
@@ -1431,7 +1398,7 @@ double RowColDFT2D(unsigned char **ImageGray, double **OutputReal, double **Outp
 	free_dmatrix(Imag, nH, nW);
 
 	QueryPerformanceCounter((LARGE_INTEGER*)&end);
-	// 처리 시간(초)
+	
 	double timeDiff = (double)(end - start)/(double)freq; 
 
 	return timeDiff;
@@ -1584,7 +1551,7 @@ double FFT2D(unsigned char **ImageGray, double **OutputReal, double **OutputImag
 	delete [] dImagY;
 
 	QueryPerformanceCounter((LARGE_INTEGER*)&end);
-	// 처리 시간(초)
+	
 	double timeDiff = (double)(end - start)/(double)freq; 
 
 	return timeDiff;
@@ -1721,7 +1688,7 @@ void pTileThresholding(unsigned char **ImageGray, unsigned char **OutputGray, in
 
 	Sum = 0;
 
-	if(nType == 0) // 상위
+	if(nType == 0) // Upper
 	{
 		for(i = GRAY_CNT-1 ; i >= 0 ; i--)
 		{
@@ -1733,7 +1700,7 @@ void pTileThresholding(unsigned char **ImageGray, unsigned char **OutputGray, in
 			}
 		}
 	}
-	else	// 하위
+	else	// Lower
 	{
 		for(i = 0 ; i < GRAY_CNT ; i++)
 		{
@@ -1748,8 +1715,8 @@ void pTileThresholding(unsigned char **ImageGray, unsigned char **OutputGray, in
 
 	for(y = 0 ; y < nH ; y++)
 		for(x = 0 ; x < nW ; x++)
-			if(!nType && ImageGray[y][x] > Thre ||	// 상위
-				nType && ImageGray[y][x] < Thre)	// 하위
+			if(!nType && ImageGray[y][x] > Thre ||	
+				nType && ImageGray[y][x] < Thre)	
 				OutputGray[y][x] = GRAY_CNT-1;
 			else
 				OutputGray[y][x] = 0;
@@ -2526,7 +2493,7 @@ void Dot(unsigned char **ImageGray, int nW, int nH, int x, int y, unsigned char 
 void DilationBinary(unsigned char **ImageGray, unsigned char **OutputGray, int nW, int nH, int nShape, int nSize)
 {
 	//	nShape 
-	// 0: 사각, 1: 수평, 2: 수직
+	// 0: Square, 1: -, 2: |
 
 	int x, y;
 	int dx, dy;
@@ -2722,7 +2689,7 @@ void DilationVertialBinaryFast(unsigned char **Image2DGray, int nW, int nH, int 
 void ErosionBinary(unsigned char **ImageGray, unsigned char **OutputGray, int nW, int nH, int nShape, int nSize)
 {
 	//	nShape 
-	// 0: 사각, 1: 수평, 2: 수직
+	// 0: Square, 1: -, 2: |
 
 	int x, y;
 	int dx, dy;
@@ -2919,7 +2886,7 @@ void ErosionVertialBinaryFast(unsigned char **Image2DGray, int nW, int nH, int n
 void DilationGray(unsigned char **ImageGray, unsigned char **OutputGray, int nW, int nH, int nShape, int nSize)
 {
 	//	nShape 
-	// 0: 사각, 1: 수평, 2: 수직
+	// 0: Square, 1: -, 2: |
 
 	int x, y;
 	int dx, dy;
@@ -2961,7 +2928,7 @@ void DilationGray(unsigned char **ImageGray, unsigned char **OutputGray, int nW,
 void ErosionGray(unsigned char **ImageGray, unsigned char **OutputGray, int nW, int nH, int nShape, int nSize)
 {
 	//	nShape 
-	// 0: 사각, 1: 수평, 2: 수직
+	// 0: Square, 1: -, 2: |
 
 	int x, y;
 	int dx, dy;
@@ -3778,8 +3745,8 @@ void KMeanBinary(unsigned char **Image, unsigned char ***OutputGray, int nW, int
 	ClsCnt = new int[nK];
 	Thre = new int[nK-1];
 
-	Center[0] = 0; while(His[Center[0]++] <= 0); // Histogram이 존재하는 가장 작은 graylevel + 1
-	Center[nK-1] = 255; while(His[Center[nK-1]--] <= 0); // Histogram이 존재하는 가장 큰 graylevel - 1
+	Center[0] = 0; while(His[Center[0]++] <= 0); 
+	Center[nK-1] = 255; while(His[Center[nK-1]--] <= 0);
 
 	for(i = 1 ; i < nK-1 ; i++)
 		Center[i] = Center[0] + (Center[nK-1]-Center[0])/(nK-1)*i;

@@ -11,7 +11,7 @@
 
 #include "Image.h"	
 #include "Image4Win.h"
-// 창에 표시할 최대 영상의 개수
+
 #define MAX_IMAGE		1000
 
 class CImageProcessingDoc : public CDocument
@@ -26,8 +26,8 @@ public:
 
 // Operations
 public:
-	ImageInfo m_Image[MAX_IMAGE];	// 영상 배열
-	int m_nImageCnt;				// 현재 창에 표시할 영상
+	ImageInfo m_Image[MAX_IMAGE];	
+	int m_nImageCnt;				
 
 
 // Overrides

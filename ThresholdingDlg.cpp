@@ -5,8 +5,8 @@
 #include "ImageProcessing.h"
 #include "ThresholdingDlg.h"
 
-#include "Image.h"		// 추가
-#include  "Image4Win.h"
+#include "Image.h"		
+#include "Image4Win.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -50,7 +50,6 @@ BOOL CThresholdingDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 	
-	// 임계치 범위 및 초기값 지정
 	m_ThresholdCtrl.SetRange(0, 255);
 	m_ThresholdCtrl.SetPos(128);
 
@@ -76,18 +75,15 @@ void CThresholdingDlg::Set(BYTE **Input, BYTE **Output, int nW, int nH, int nPos
 		for(x = 0 ; x < nW ; x++)
 			Histogram[Input[y][x]]++;
 
-	// 최대 도수값 추출
 	for(i = 0 ; i < GRAY_CNT ; i++)
 		if(Histogram[i] > MaxHis) MaxHis = Histogram[i];
 
 	m_nHisW = 256;
 	m_nHisH = 100;
 
-	// 히스토그램 영상 메모리 할당
 	m_HisImage = cmatrix(m_nHisH, m_nHisW);
 	m_HisImageThre = cmatrix(m_nHisH, m_nHisW);
 
-	// 히스토그램 영상 생성
 	for(y = 0 ; y < m_nHisH ; y++)
 		for(x = 0 ; x < m_nHisW ; x++)
 		{
@@ -97,7 +93,6 @@ void CThresholdingDlg::Set(BYTE **Input, BYTE **Output, int nW, int nH, int nPos
 
 void CThresholdingDlg::OnCancel() 
 {
-	// 히스토그램 영상 메모리 해제
 	free_cmatrix(m_HisImage, m_nHisH, m_nHisW);
 	free_cmatrix(m_HisImageThre, m_nHisH, m_nHisW);
 
@@ -109,10 +104,8 @@ void CThresholdingDlg::OnCustomdrawThreshold(NMHDR* pNMHDR, LRESULT* pResult)
 	int nThre = m_ThresholdCtrl.GetPos();
 	int x, y;
 
-	// 임계치를 표시
 	SetDlgItemInt(IDC_THRESHOLD_VALUE, nThre);
 
-	// 이진화
 	for(y = 0 ; y < m_nH ; y++)
 		for(x = 0 ; x < m_nW ; x++)
 			m_OutputGray[y][x] = (m_InputGray[y][x]>nThre) ? GRAY_CNT-1 : 0;

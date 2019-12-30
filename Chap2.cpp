@@ -5,12 +5,12 @@
 #include "ImageProcessing.h"
 #include "Chap2.h"
 
-#include "Image.h"		// 추가
+#include "Image.h"		
 #include  "Image4Win.h"
 
-#include "ThresholdingDlg.h"	// 추가
+#include "ThresholdingDlg.h"
 
-#include <cmath>			// 추가
+#include <cmath>			
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -72,8 +72,8 @@ BOOL CChap2::OnInitDialog()
 	
 	SetDlgItemInt(IDC_THRESHOLD_VALUE, 128);	
 
-	m_OperationType.InsertString(0, _T("합"));
-	m_OperationType.InsertString(1, _T("차"));
+	m_OperationType.InsertString(0, _T("Add"));
+	m_OperationType.InsertString(1, _T("Subtraction"));
 	m_OperationType.InsertString(2, _T("AND"));
 	m_OperationType.InsertString(3, _T("OR"));
 
@@ -95,37 +95,29 @@ void CChap2::OnHistogram()
 	int Histogram[GRAY_CNT] = {0};
 	int x, y, i, MaxHis = -1;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
-
 	ImageGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
-	// 히스토그램 계산
 	for(y = 0 ; y < nH ; y++)
 		for(x = 0 ; x < nW ; x++)
 			Histogram[ImageGray[y][x]]++;
 
-	// 최대 도수값 추출
 	for(i = 0 ; i < GRAY_CNT ; i++)
 		if(Histogram[i] > MaxHis) MaxHis = Histogram[i];
 
 	int nHisW = GRAY_CNT, nHisH = 100;
 	BYTE **HisImage;
 
-	// 히스토그램 영상 초기화
 	HisImage = cmatrix(nHisH, nHisW);
 
-	// 히스토그램 영상 생성
 	for(y = 0 ; y < nHisH ; y++)
 		for(x = 0 ; x < nHisW ; x++)
 		{
 			HisImage[y][x] = (Histogram[x]*(nHisH-1)/MaxHis > nHisH-1-y) ? 0 : GRAY_CNT-1;
 		}
 
-	// 히스토그램 영상 출력
 	DisplayCimage2D(HisImage, nHisW, nHisH, nPosX, nPosY+nH);
 	
 	free_cmatrix(HisImage, nHisH, nHisW);
@@ -140,15 +132,12 @@ void CChap2::OnReverse()
 	BYTE **ImageGray;
 	int x, y;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
-	// 역영상 계산
 	for(y = 0 ; y < nH ; y++)
 		for(x = 0 ; x < nW ; x++)
 			ImageGray[y][x] = ~ImageGray[y][x];
@@ -166,16 +155,14 @@ void CChap2::OnThresholding()
 	int x, y;
 	int Thre;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	Thre = GetDlgItemInt(IDC_THRESHOLD_VALUE);
-	// 이진화
+
 	for(y = 0 ; y < nH ; y++)
 		for(x = 0 ; x < nW ; x++)
 			ImageGray[y][x] = (ImageGray[y][x]>Thre) ? GRAY_CNT-1 : 0;
@@ -190,13 +177,11 @@ void CChap2::OnThresholdingDlg()
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray, **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	CThresholdingDlg dlg;
@@ -218,13 +203,11 @@ void CChap2::OnMove()
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray, **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	int x0 = GetDlgItemInt(IDC_X0);
@@ -243,13 +226,11 @@ void CChap2::OnScaleX2()
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray, **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH*2, nW*2);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	ScaleX2(ImageGray, OutputGray, nW, nH);
@@ -265,11 +246,10 @@ void CChap2::OnRotate()
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray, **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	double dDeg = GetDlgItemInt(IDC_DEG);
-	double dAng = dDeg * acos(-1.) / 180.;	// 각도를 라디안으로 수정
+	double dAng = dDeg * acos(-1.) / 180.;	
 
 	int nOutW = (int)(nW*fabs(cos(dAng)) + nH*fabs(sin(dAng)));
 	int nOutH = (int)(nW*fabs(sin(dAng)) + nH*fabs(cos(dAng)));
@@ -277,7 +257,6 @@ void CChap2::OnRotate()
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nOutH, nOutW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	Rotate(ImageGray, OutputGray, nW, nH, nOutW, nOutH, dDeg);
@@ -293,20 +272,18 @@ void CChap2::OnDithering()
 	int nW, nH, nPosX, nPosY;
 	BYTE **ImageGray, **OutputGray;
 
-	// 영상 정보 읽기
 	if(!GetCurrentImageInfo(&nW, &nH, &nPosX, &nPosY)) return;
 
 	ImageGray = cmatrix(nH, nW);
 	OutputGray = cmatrix(nH, nW);
 
-	// 회색조 영상 읽기
 	GetCurrentImageGray(ImageGray);
 
 	int x, y;
 
 	BYTE Dither2[2][2] = {{0, 128}, {192, 64}};
 
-	// 2*2 디더링 패턴에 의한 디더링
+	// 2*2 Dithering
 	for(y = 0 ; y < nH ; y++)
 		for(x = 0 ; x < nW ; x++)
 		{
@@ -318,7 +295,7 @@ void CChap2::OnDithering()
 
 	BYTE Dither4[4][4] = {{0, 128, 32, 160}, {192, 64, 224, 96}, {48, 176, 16, 144}, {240, 112, 208, 80}};
 
-	// 4*4 디더링 패턴에 의한 디더링
+	// 4*4 Dithering
 	for(y = 0 ; y < nH ; y++)
 		for(x = 0 ; x < nW ; x++)
 		{
