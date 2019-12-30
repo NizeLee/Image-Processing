@@ -3,7 +3,7 @@
 * C/C++ development tool for image processing, computer vision and machine learning
 
 ## Introduction
-* Open program sources (wihtout OpenCV)
+* Open program sources (without OpenCV)
 * Visual Studio 2019, 2017, 2015, 2013 and lower 
 * GUI: MFC
 * Win32 and x64
