@@ -1,5 +1,5 @@
 # Image-Processing
-* Image-Processing (Windows)
+* Image Processing (Windows)
 * C/C++ development tool for image processing, computer vision and machine learning
 
 ## Introduction
