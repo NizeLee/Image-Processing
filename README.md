@@ -64,6 +64,7 @@ void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent) {
 ## Visual Studio
 * Visual Studio 2019, 2017, 2015, 2013 and lower 
   + MFC libraries are required
+  + Project setting
 <br> <img src="Image_processing_02.png"></img>  
 * Visual Studio 2013 and lower 
   + Replace JpegLib.lib, JpegLibD.lib, JpegLib_64.lib and JpegLibD_64.lib with those in Libs(2013)
