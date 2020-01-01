@@ -64,6 +64,8 @@ void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent) {
 ## Visual Studio
 * Visual Studio 2019, 2017, 2015, 2013 and lower 
   + MFC libraries are required
+    1. Select menu: [Tools]-[Get Tools and Features...], Visual Studio Installer
+    2. 
   + Project setting
 <br> <img src="Image_processing_02.png"></img>  
 * Visual Studio 2013 and lower 
