@@ -64,7 +64,7 @@ void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent) {
 ## Visual Studio
 * Visual Studio 2019, 2017, 2015, 2013 and lower 
   + MFC libraries are required
-    -d
+    = d
     - If the MFC libraries were not installed
       1. Run 'Visual Studio Installer' by selecting the menu: [Tools]-[Get Tools and Features...]
       2. Check [Desktop development with C++] in Workloads tab 
