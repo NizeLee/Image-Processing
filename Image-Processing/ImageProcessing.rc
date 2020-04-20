@@ -1,0 +1,808 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 한국어(대한민국) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
+#pragma code_page(949)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 18, 1\r\n"
+    "#pragma code_page(949)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\ImageProcessing.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""l.kor\\afxres.rc""          // Standard components\r\n"
+    "#include ""l.kor\\afxprint.rc""        // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\ImageProcessing.ico"
+
+IDR_IMAGEPTYPE          ICON                    "res\\ImageProcessingDoc.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE_AS
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      IDM_EDIT_REGION
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM "&Main Dialog",                IDD_VIEW_MAIN_PROCESS
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Image Processing...",        ID_APP_ABOUT
+    END
+END
+
+IDR_IMAGEPTYPE MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "Open &Current View...",       ID_FILE_OPEN_CUR
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "Print &Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "ROI Set",                     IDM_EDIT_REGION
+    END
+    POPUP "Image &Processing"
+    BEGIN
+        MENUITEM "&Gray Copy",                  IDM_GRAY_DUPLICATE
+        MENUITEM "&Color Copy",                 IDM_COLOR_DUPLICATE
+        MENUITEM "Image Processing I",          IDM_CHAP2
+        MENUITEM "Image Processing II",         IDM_CHAP3
+        MENUITEM "Image Processing III",        IDM_CHAP4
+        MENUITEM "Image Processing IV",         IDM_CHAP5
+        MENUITEM "Application",                 IDM_APPLICATION
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM "&Main Dialog",                IDD_VIEW_MAIN_PROCESS
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&Next Window",                ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Image Processing...",        ID_APP_ABOUT
+    END
+END
+
+IDR_CONTEXT MENU
+BEGIN
+    POPUP "Context"
+    BEGIN
+        MENUITEM "×2",                          IDM_SCALE_X2
+        MENUITEM "×0.5",                        IDM_SCALE_HALF
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "&Select Region",              IDM_SEL_REGION
+        MENUITEM "&Select Region X2",           IDM_SEL_REGION_ZOOM
+        MENUITEM SEPARATOR
+        POPUP "&Operations"
+        BEGIN
+            MENUITEM "&Add",                        IDM_SUM
+            MENUITEM "&Subtraction",                IDM_SUBTRACT
+            MENUITEM "&Difference",                 IDM_DIFFERENCE
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Remove Region",               IDM_DEL_REGION
+        MENUITEM SEPARATOR
+        MENUITEM "Image Information",           32795
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 235, 63
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Image Processing"
+FONT 9, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "Open Image Processing",IDC_STATIC,40,10,119,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2013",IDC_STATIC,40,23,119,8
+    DEFPUSHBUTTON   "확인",IDOK,178,7,50,14,WS_GROUP
+    LTEXT           "Daeho Lee, Kyung Hee University",IDC_STATIC,40,36,167,8
+END
+
+IDD_CHAP2 DIALOGEX 0, 0, 187, 150
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Image Processing I"
+FONT 9, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Histogram",IDC_HISTOGRAM,7,7,73,12
+    PUSHBUTTON      "Close",IDC_CANCEL,107,124,73,12
+    PUSHBUTTON      "Reverse",IDC_REVERSE,7,28,73,12
+    PUSHBUTTON      "Thresholding",IDC_THRESHOLDING,7,78,73,12
+    PUSHBUTTON      "Thresholding...",IDC_THRESHOLDING_DLG,7,100,73,12
+    PUSHBUTTON      "Operation",IDC_OPERATION,107,105,73,12
+    EDITTEXT        IDC_THRESHOLD_VALUE,7,57,73,12,ES_RIGHT | ES_AUTOHSCROLL
+    COMBOBOX        IDC_OPERATION_TYPE,107,83,73,143,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Move",IDC_MOVE,107,28,73,12
+    EDITTEXT        IDC_X0,107,7,30,12,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_Y0,150,7,30,12,ES_RIGHT | ES_AUTOHSCROLL
+    PUSHBUTTON      "X2",IDC_SCALE_X2,107,48,73,12
+    PUSHBUTTON      "Rotation",IDC_ROTATE,146,64,34,12
+    EDITTEXT        IDC_DEG,108,64,30,12,ES_RIGHT | ES_AUTOHSCROLL
+    PUSHBUTTON      "Dithering",IDC_DITHERING,7,124,73,12
+END
+
+IDD_THRESHOLDING_DLG DIALOGEX 0, 0, 170, 94
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Binarization"
+FONT 9, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Close",IDC_CANCEL,90,71,73,12
+    CONTROL         "Slider1",IDC_THRESHOLD,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,7,7,156,20
+    CTEXT           "0",IDC_THRESHOLD_VALUE,7,36,156,14
+END
+
+IDD_CHAP3 DIALOGEX 0, 0, 187, 171
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Image Processing II"
+FONT 9, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Histogram Equalization",IDC_HISTOGRAM_EQ,7,7,73,12
+    PUSHBUTTON      "Close",IDC_CANCEL,107,124,73,12
+    PUSHBUTTON      "Mean",IDC_MEAN,7,48,73,12
+    EDITTEXT        IDC_WINDOW_SIZE,43,27,37,12,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "Window",IDC_STATIC,7,28,33,12,SS_CENTERIMAGE
+    PUSHBUTTON      "Median",IDC_MEDIAN,7,66,73,12
+    PUSHBUTTON      "Sobel",IDC_SOBEL,7,84,73,12
+    PUSHBUTTON      "Laplacian",IDC_LAPLACIAN,7,100,73,12
+    PUSHBUTTON      "Laplacian Sharpening",IDC_LAPLACIAN_SHARP,7,124,73,12
+    PUSHBUTTON      "DFT",IDC_DFT,107,7,73,12
+    PUSHBUTTON      "FFT",IDC_FFT,107,43,73,12
+    PUSHBUTTON      "DFT(Row-Col)",IDC_DFT_ROW_COL,107,25,73,12
+    PUSHBUTTON      "Filtering",IDC_FILTERING,107,100,73,12
+    COMBOBOX        IDC_FILTER_TYPE,106,65,46,55,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_FILTER_TYPE2,155,66,25,55,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_N,163,84,17,12,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "n",IDC_STATIC,151,84,9,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_DC,126,84,18,12,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "Dc",IDC_STATIC,109,84,13,12,SS_CENTERIMAGE
+    PUSHBUTTON      "Dist. Trans.",IDC_DIST_TRANS,7,152,73,12
+END
+
+IDD_CHAP4 DIALOGEX 0, 0, 187, 69
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Image Processing III"
+FONT 9, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Close",IDC_CANCEL,107,49,73,12
+    PUSHBUTTON      "DCT",IDC_DCT,7,24,73,12
+    EDITTEXT        IDC_BLOCK_SIZE,43,7,37,12,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "Block",IDC_STATIC,7,8,33,12,SS_CENTERIMAGE
+    PUSHBUTTON      "Compression",IDC_COMPRESSION,107,24,73,12
+END
+
+IDD_CHAP5 DIALOGEX 0, 0, 187, 189
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Image Processing IV"
+FONT 9, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Close",IDC_CANCEL,107,169,73,12
+    PUSHBUTTON      "p-tile thresholding",IDC_THRESHOLDING_PTILE,7,25,73,12
+    EDITTEXT        IDC_PERCENT,43,7,20,12,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "%",IDC_STATIC,69,7,11,12,SS_CENTERIMAGE
+    COMBOBOX        IDC_UP_DOWN,7,7,30,55,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Valley thresholding",IDC_THRESHOLDING_VALLEY,7,43,73,12
+    PUSHBUTTON      "Iterate thresholding",IDC_THRESHOLDING_ITERATE,7,65,73,12
+    PUSHBUTTON      "Hough transform",IDC_HOUGH,7,84,73,12
+    PUSHBUTTON      "Turtle",IDC_TURTLE,7,100,73,12
+    PUSHBUTTON      "k-cosine",IDC_K_COSINE,107,118,73,12
+    EDITTEXT        IDC_K,125,102,55,12,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "k",IDC_STATIC,108,103,11,12,SS_CENTERIMAGE
+    PUSHBUTTON      "Dilation",IDC_DILATION,107,25,73,12
+    CONTROL         "Binary",IDC_BIN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,94,7,29,10
+    EDITTEXT        IDC_ELE_SIZE,160,7,20,12,ES_RIGHT | ES_AUTOHSCROLL
+    COMBOBOX        IDC_SHAPE,128,7,30,55,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "Erosion",IDC_EROSION,107,43,73,12
+    PUSHBUTTON      "Closing",IDC_CLOSE,107,60,73,12
+    PUSHBUTTON      "Opening",IDC_OPEN,107,84,73,12
+    PUSHBUTTON      "Labeling",IDC_LABELING,7,130,73,12
+    PUSHBUTTON      "Thinning",IDC_THINNING,7,147,73,12
+    PUSHBUTTON      "Labeling-Moment",IDC_LABELING_MOMENT,7,169,73,12
+END
+
+IDD_APPLICATION DIALOGEX 0, 0, 187, 252
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Application"
+FONT 9, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Close",IDC_CANCEL,107,233,73,12
+    PUSHBUTTON      "Run",IDC_VEHICLE_RUN,57,39,73,12
+    GROUPBOX        "Vehicle detection",IDC_STATIC,7,7,173,47
+    EDITTEXT        IDC_FOLDER_NAME,80,19,71,12,ES_AUTOHSCROLL
+    LTEXT           "Image sequences",IDC_STATIC,11,19,64,12,SS_CENTERIMAGE
+    PUSHBUTTON      "...",IDC_FOLDER_SEL,157,19,10,12
+    PUSHBUTTON      "Run",IDC_AVI_RUN,57,95,73,12
+    GROUPBOX        "Vehicle detection",IDC_STATIC,7,63,173,47
+    EDITTEXT        IDC_FILE_NAME,68,76,83,12,ES_AUTOHSCROLL
+    LTEXT           "AVI file",IDC_STATIC,24,74,41,12,SS_CENTERIMAGE
+    PUSHBUTTON      "...",IDC_FILE_SEL,157,76,10,12
+    PUSHBUTTON      "Run",IDC_MOTION_RUN,57,136,73,12
+    GROUPBOX        "Motion detection",IDC_STATIC,7,119,173,47
+    PUSHBUTTON      "Run",IDC_BPN_EX_RUN,57,195,73,12
+    GROUPBOX        "Bpn example",IDC_STATIC,7,178,173,47
+END
+
+IDD_MAIN_PROCESS DIALOGEX 0, 0, 233, 478
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_VISIBLE
+FONT 9, "MS Shell Dlg", 400, 0, 0x0
+BEGIN
+    GROUPBOX        "Main processing",IDC_STATIC,7,7,219,176
+    CONTROL         "Seq.",IDC_SOURCE_TYPE0,"Button",BS_AUTORADIOBUTTON | WS_GROUP,15,18,25,11
+    CONTROL         "AVI",IDC_SOURCE_TYPE1,"Button",BS_AUTORADIOBUTTON,100,18,25,11
+    CONTROL         "YUV",IDC_SOURCE_TYPE2,"Button",BS_AUTORADIOBUTTON,126,18,25,11
+    CONTROL         "Empty",IDC_SOURCE_TYPE3,"Button",BS_AUTORADIOBUTTON,155,18,31,11
+    CONTROL         "Sub.",IDC_SUB_FOLDER,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,193,18,25,11
+    CONTROL         "List1",IDC_FILE_LIST,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | WS_BORDER | WS_TABSTOP,15,84,203,66
+    PUSHBUTTON      "Run",IDC_RUN,166,34,25,13
+    EDITTEXT        IDC_START,33,48,21,13,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_END,76,48,21,13,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "Start",IDC_STATIC,15,49,17,12,SS_CENTERIMAGE
+    LTEXT           "End",IDC_STATIC,57,49,15,12,SS_CENTERIMAGE
+    PUSHBUTTON      "Pause",IDC_PAUSE,193,34,25,13
+    GROUPBOX        "Cam. Processing",IDC_STATIC,7,190,219,35
+    PUSHBUTTON      "Grab",IDC_GRAB,160,261,58,13
+    PUSHBUTTON      "...",IDC_SEL_FOLDER2,15,243,14,13
+    EDITTEXT        IDC_GW,24,203,16,13,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_GH,50,203,16,13,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "W",IDC_STATIC,15,204,8,12,SS_CENTERIMAGE
+    LTEXT           "H",IDC_STATIC,41,204,8,12,SS_CENTERIMAGE
+    PUSHBUTTON      "V Src.",IDC_VS,101,203,28,13
+    PUSHBUTTON      "Cam. ON",IDC_CAM_ON,67,203,33,13
+    CONTROL         "Jpg",IDC_TYPE,"Button",BS_AUTORADIOBUTTON | WS_GROUP,163,245,21,11
+    CONTROL         "Bmp",IDC_TYPE2,"Button",BS_AUTORADIOBUTTON,191,243,26,13
+    PUSHBUTTON      "Reset #",IDC_RESET_G_NUM,188,203,30,13
+    EDITTEXT        IDC_GAP,165,203,22,13,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "Gap(ms)",IDC_STATIC,135,204,29,12,SS_CENTERIMAGE
+    CONTROL         "Slider1",IDC_SLEEP,"msctls_trackbar32",TBS_BOTH | TBS_NOTICKS | WS_TABSTOP,15,63,88,15
+    RTEXT           "0",IDC_DISP_SLEEP,108,66,22,12,SS_CENTERIMAGE
+    LISTBOX         IDC_LIST,7,290,219,181,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_DISP_FOLDER2,31,243,95,13,ES_AUTOHSCROLL | ES_READONLY
+    GROUPBOX        "Grabbing",IDC_STATIC,7,229,219,48
+    PUSHBUTTON      "...",IDC_SEL_SOURCE,15,34,14,13
+    EDITTEXT        IDC_DISP_SOURCE,34,34,126,13,ES_AUTOHSCROLL | ES_READONLY
+    CTEXT           "0",IDC_TOTAL_FRAME,99,49,70,12,SS_CENTERIMAGE
+    CONTROL         "Step",IDC_STEP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,179,48,25,13
+    COMBOBOX        IDC_SEQ_TYPE,41,17,55,143,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Save scr.",IDC_SAVE_SCREEN,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,166,67,52,11
+    PUSHBUTTON      "Rect Draw",IDC_DRAW_RECT_REGION,15,161,44,13
+    PUSHBUTTON      "Region Draw",IDC_DRAW_REGION,61,161,44,13
+    EDITTEXT        IDC_PT_CNT,106,162,21,13,ES_RIGHT | ES_AUTOHSCROLL
+    PUSHBUTTON      "Save R.",IDC_SAVE_REGION,130,161,44,13
+    PUSHBUTTON      "Read R.",IDC_READ_REGION,175,161,44,13
+END
+
+IDD_YUV_OPT DIALOGEX 0, 0, 201, 101
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "YUV option"
+FONT 9, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "W",IDC_STATIC,7,8,12,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_W,25,7,37,12,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "H",IDC_STATIC,68,7,12,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_H,86,7,37,12,ES_RIGHT | ES_AUTOHSCROLL
+    CONTROL         "QCIF",IDC_SCALE_FORMAT0,"Button",BS_AUTORADIOBUTTON | WS_GROUP,7,25,28,11
+    CONTROL         "CIF",IDC_SCALE_FORMAT1,"Button",BS_AUTORADIOBUTTON,48,25,28,11
+    CONTROL         "DCIF",IDC_SCALE_FORMAT2,"Button",BS_AUTORADIOBUTTON,89,25,28,11
+    CONTROL         "USER",IDC_SCALE_FORMAT3,"Button",BS_AUTORADIOBUTTON,130,25,28,11
+    CONTROL         "Y4M",IDC_SCALE_FORMAT4,"Button",BS_AUTORADIOBUTTON,171,25,28,11
+    CONTROL         "YUV420",IDC_YUV_TYPE0,"Button",BS_AUTORADIOBUTTON | WS_GROUP,7,61,45,11
+    CONTROL         "YUV422",IDC_YUV_TYPE1,"Button",BS_AUTORADIOBUTTON,59,61,45,13
+    CONTROL         "YUV444",IDC_YUV_TYPE2,"Button",BS_AUTORADIOBUTTON,111,61,45,13
+    PUSHBUTTON      "Ok",IDOK,7,82,73,12,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,128,82,73,12
+END
+
+IDD_SAVE_SCREEN_OPT DIALOGEX 0, 0, 230, 95
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Save screen option"
+FONT 9, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Cancel",IDCANCEL,182,77,41,12
+    EDITTEXT        IDC_H,151,7,37,12,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "H",IDC_STATIC,132,7,12,12,SS_CENTERIMAGE
+    PUSHBUTTON      "Ok",IDOK,125,77,41,12
+    LTEXT           "W",IDC_STATIC,71,8,12,12,SS_CENTERIMAGE
+    EDITTEXT        IDC_W,89,7,37,12,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_FPS,49,57,37,12,ES_RIGHT | ES_AUTOHSCROLL
+    LTEXT           "fps",IDC_STATIC,31,58,12,12,SS_CENTERIMAGE
+    CONTROL         "Save view",IDC_SAVE_VIEW,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,7,48,13
+    PUSHBUTTON      "Rect",IDC_SEL_SAVE_RECT,65,77,41,12,NOT WS_VISIBLE
+    LTEXT           "",IDC_VIEW_INFO,51,41,172,12
+    CONTROL         "Screen",IDC_NOT_VIEW_OPT,"Button",BS_AUTORADIOBUTTON | WS_GROUP,67,25,40,14
+    CONTROL         "Window",IDC_NOT_VIEW_OPT2,"Button",BS_AUTORADIOBUTTON,124,25,40,14
+    CONTROL         "Rectangle",IDC_NOT_VIEW_OPT3,"Button",BS_AUTORADIOBUTTON,183,25,40,14
+END
+
+IDD_SCREEN_SELECTION DIALOGEX 0, 0, 283, 169
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_SYSMENU
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041204b0"
+        BEGIN
+            VALUE "FileDescription", "Aris Lab."
+            VALUE "FileVersion", "0.98"
+            VALUE "InternalName", "Aris Lab."
+            VALUE "LegalCopyright", "Copyright (C) 2013"
+            VALUE "OriginalFilename", "ImageProcessing.EXE"
+            VALUE "ProductName", "ImageProcessing"
+            VALUE "ProductVersion", "0.98"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x412, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 56
+    END
+
+    IDD_CHAP2, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 143
+    END
+
+    IDD_THRESHOLDING_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 87
+    END
+
+    IDD_CHAP3, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 164
+    END
+
+    IDD_CHAP4, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 62
+    END
+
+    IDD_CHAP5, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 182
+    END
+
+    IDD_APPLICATION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 245
+    END
+
+    IDD_MAIN_PROCESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 226
+        VERTGUIDE, 15
+        VERTGUIDE, 218
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 471
+    END
+
+    IDD_YUV_OPT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 94
+    END
+
+    IDD_SAVE_SCREEN_OPT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 223
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_SCREEN_SELECTION, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 276
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 162
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_THRESHOLDING_DLG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_APPLICATION AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_CHAP2 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_CHAP3 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_CHAP5 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_CHAP4 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "ImageProcessing"
+    IDR_IMAGEPTYPE          "\nImageP\nImageP\n\n\nImageProcessing.Document\nImageP Document"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "ImageProcessing"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW             "New File\nNew File"
+    ID_FILE_OPEN            "Open\nOpen"
+    ID_FILE_CLOSE           "Close\nClose"
+    ID_FILE_SAVE            "Save\nSave"
+    ID_FILE_SAVE_AS         "Save as\nSave as"
+    ID_FILE_PAGE_SETUP      "Page setup\nPage setup"
+    ID_FILE_PRINT_SETUP     "Print setup\nPrint setup"
+    ID_FILE_PRINT           "Print\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Print preview\nPrint preview"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "About\nAbout"
+    ID_APP_EXIT             "Exit\nExit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_MRU_FILE1       "Open"
+    ID_FILE_MRU_FILE2       "Open"
+    ID_FILE_MRU_FILE3       "Open"
+    ID_FILE_MRU_FILE4       "Open"
+    ID_FILE_MRU_FILE5       "Open"
+    ID_FILE_MRU_FILE6       "Open"
+    ID_FILE_MRU_FILE7       "Open"
+    ID_FILE_MRU_FILE8       "Open"
+    ID_FILE_MRU_FILE9       "Open"
+    ID_FILE_MRU_FILE10      "Open"
+    ID_FILE_MRU_FILE11      "Open"
+    ID_FILE_MRU_FILE12      "Open"
+    ID_FILE_MRU_FILE13      "Open"
+    ID_FILE_MRU_FILE14      "Open"
+    ID_FILE_MRU_FILE15      "Open"
+    ID_FILE_MRU_FILE16      "Open"
+END
+
+STRINGTABLE
+BEGIN
+    ID_NEXT_PANE            "Next pane\nNext pane"
+    ID_PREV_PANE            "Prev pane\nPrev pane"
+END
+
+STRINGTABLE
+BEGIN
+    ID_WINDOW_NEW           "New window\nNew window"
+    ID_WINDOW_ARRANGE       "Arrange\nArrange"
+    ID_WINDOW_CASCADE       "Cascade\nCascade"
+    ID_WINDOW_TILE_HORZ     "Tile\nTile"
+    ID_WINDOW_TILE_VERT     "Tile\nTile"
+    ID_WINDOW_SPLIT         "Split\nSplit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_CLEAR           "Clear\nClear"
+    ID_EDIT_CLEAR_ALL       "Clear all\nClear all"
+    ID_EDIT_COPY            "Copy\nCopy"
+    ID_EDIT_CUT             "Cut\nCut"
+    ID_EDIT_FIND            "Find\nFind"
+    ID_EDIT_PASTE           "Paste\nPaste"
+    ID_EDIT_REPEAT          "Repeat\nRepeat"
+    ID_EDIT_REPLACE         "Replace\nReplace"
+    ID_EDIT_SELECT_ALL      "Select all\nSelect all"
+    ID_EDIT_UNDO            "Undo\nUndo"
+    ID_EDIT_REDO            "Redo\nRedo"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_TOOLBAR         "Toolbar\nToolbar"
+    ID_VIEW_STATUS_BAR      "Status bar\nStatus bar"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          "Size"
+    AFX_IDS_SCMOVE          "Move"
+    AFX_IDS_SCMINIMIZE      "Minimize"
+    AFX_IDS_SCMAXIMIZE      "Maximize"
+    AFX_IDS_SCNEXTWINDOW    "Next window"
+    AFX_IDS_SCPREVWINDOW    "Prev window"
+    AFX_IDS_SCCLOSE         "Close"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore"
+    AFX_IDS_SCTASKLIST      "List"
+    AFX_IDS_MDICHILD        "Child"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Preview close\nPreview close"
+END
+
+#endif    // 한국어(대한민국) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+#ifdef _WIN32
+LANGUAGE 18, 1
+#pragma code_page(949)
+#endif //_WIN32
+#include "res\ImageProcessing.rc2"  // non-Microsoft Visual C++ edited resources
+#include "l.kor\afxres.rc"          // Standard components
+#include "l.kor\afxprint.rc"        // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
