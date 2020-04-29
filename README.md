@@ -62,7 +62,7 @@ void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent) {
 }
 ```
 
-## Example code for connected component labeling
+## Example code for connected-component labeling
 ``` C++
 int Label = imatrix(nH, nW);
 
