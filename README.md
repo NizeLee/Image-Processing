@@ -66,7 +66,7 @@ void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent) {
 ``` C++
 int Label = imatrix(nH, nW);
 
-int LabelCnt = Labeling(Image, Label, nW, nH, 30);
+int LabelCnt = Labeling(Image, Label, nW, nH, 0);
 
 if(LabelCnt > 0)
 {
