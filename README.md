@@ -61,6 +61,25 @@ void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent) {
   ...
 }
 ```
+
+## Example code for connected component labeling
+``` C++
+int Label = imatrix(nH, nW);
+
+int LabelCnt = Labeling(Image, Label, nW, nH, 30);
+
+if(LabelCnt > 0)
+{
+	CIpRect *pBoundBox = new CRect[LabelCnt];
+	SetLabelBoundBox(Label, nW, nH, pBoundBox, LabelCnt);
+	
+	// Bounding box processing
+	
+	delete [] pBoundBox;
+}
+		
+free_imatrix(Label, nH, nW);
+``` 
 ## Visual Studio
 * Visual Studio 2019, 2017, 2015, 2013 and lower 
   + MFC libraries are required    	  
