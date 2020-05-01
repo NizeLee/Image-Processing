@@ -101,8 +101,8 @@ int Scale = 100;	// Display scale
 // bool DisplayCimage2D(unsigned char  **ImageGray, int nW, int nH, int nPosX, int nPosY, 
 //	bool bErase = true, bool bDelete = false, int Rate = 100);
 // if bErase is ture, the images which are not listed are erased
-// if bDelete is ture, the previously displayed image having the same size and the same position with the current image 
-//			is deleted from the dispaly list
+// if bDelete is ture, the previously displayed image having the same size and the same position 
+//			with the current image is deleted from the dispaly list
 DisplayCimage2D(ImageGray, nW, nH, nPosX, nPosY, false, ture, Scale);
 DisplayIimage2D(IIimage2D, nW, nH, nPosX, nPosY, false, ture);	// IIimage2D data are normalized to [0, 255]
 DisplayDimage2D(DImage2D, nW, nH, nPosX, nPosY, false, ture);	// DImage2D data are normalized to [0, 255]
