@@ -103,9 +103,9 @@ int Scale = 100;	// Display scale
 // if bErase is ture, the images which are not listed are erased
 // if bDelete is ture, the previously displayed image having the same size and the same position 
 //			with the current image is deleted from the dispaly list
-DisplayCimage2D(ImageGray, nW, nH, nPosX, nPosY, false, ture, Scale);
-DisplayIimage2D(IIimage2D, nW, nH, nPosX, nPosY, false, ture);	// IIimage2D data are normalized to [0, 255]
-DisplayDimage2D(DImage2D, nW, nH, nPosX, nPosY, false, ture);	// DImage2D data are normalized to [0, 255]
+DisplayCimage2D(ImageGray, nW, nH, nPosX, nPosY, false, true, Scale);
+DisplayIimage2D(IIimage2D, nW, nH, nPosX, nPosY, false, true);	// IIimage2D data are normalized to [0, 255]
+DisplayDimage2D(DImage2D, nW, nH, nPosX, nPosY, false, true);	// DImage2D data are normalized to [0, 255]
 DisplayCimage1D(Image1D, nW, nH, nPosX, nPosY, false, true, Scale);
 DisplayCimage2DColor(ImageRed, ImageGreen, ImageBlue, nW, nH, nPosX, nPosY, false, true, Scale);
 ``` 
