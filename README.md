@@ -30,7 +30,7 @@
 
 ## Example code for sequential processing
 1. Add a new class
-2. Add a new processing method (1D array image - BGR, 24bit, 4Byte aligned) 
+2. Add a new processing method (1D array image - BGR, 24bit, 4byte aligned) 
 3. Add an instance member to CMainProcessDlg class (MainProcessDlg.h)
 4. Call the processing method as follows: 
 ``` C++
@@ -66,6 +66,9 @@ void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent) {
 ``` C++
 int **Label = imatrix(nH, nW);
 int SmallThre = 20; 	// the minimum area threshold for eliminating small connected components
+
+// Image: 	foregrounds	ImageGray[y][x] > 128, 
+// 		backgrounds 	otherwise
 int LabelCnt = Labeling(Image, Label, nW, nH, SmallThre); 	// returns the number of labels
 								// Labels are started from 0
 								// Background regions are labeled as -1
@@ -82,6 +85,31 @@ if(LabelCnt > 0)
 		
 free_imatrix(Label, nH, nW);
 ``` 
+
+## Example code for displaying images
+``` C++
+unsigned char **ImageGray;	// 2D image array (grayscale)
+unsigned char *Image1D; 	// 24bit color, BGR, 4byte alligned
+unsigned char **ImageRed, **ImageGreen, **ImageBlue; // 2D image array (red, green and blue components)
+int **IIimage2D;		// 2D image array (int)
+double **DImage2D;		// 2D image array (double)
+
+int nW, nH;		// Image size
+int nPosX, nPosY; 	// Display position
+int Scale = 100;	// Display scale
+
+// bool DisplayCimage2D(unsigned char  **ImageGray, int nW, int nH, int nPosX, int nPosY, 
+//	bool bErase = true, bool bDelete = false, int Rate = 100);
+// if bErase is ture, the images which are not listed are erased
+// if bDelete is ture, the previously displayed image having the same size and the same position with the current image 
+//			is deleted from the dispaly list
+DisplayCimage2D(ImageGray, nW, nH, nPosX, nPosY, false, ture, Scale);
+DisplayIimage2D(IIimage2D, nW, nH, nPosX, nPosY, false, ture);	// IIimage2D data are normalized to [0, 255]
+DisplayDimage2D(DImage2D, nW, nH, nPosX, nPosY, false, ture);	// DImage2D data are normalized to [0, 255]
+DisplayCimage1D(Image1D, nW, nH, nPosX, nPosY, false, true, Scale);
+DisplayCimage2DColor(ImageRed, ImageGreen, ImageBlue, nW, nH, nPosX, nPosY, false, true, Scale);
+``` 
+
 ## Visual Studio
 * Visual Studio 2019, 2017, 2015, 2013 and lower 
   + MFC libraries are required    	  
