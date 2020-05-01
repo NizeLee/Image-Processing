@@ -65,13 +65,15 @@ void CMainProcessDlg::OnTimer(UINT_PTR nIDEvent) {
 ## Example code for connected-component labeling
 ``` C++
 int **Label = imatrix(nH, nW);
-
-int LabelCnt = Labeling(Image, Label, nW, nH, 0);
+int SmallThre = 20; 	// the minimum area threshold for eliminating small connected components
+int LabelCnt = Labeling(Image, Label, nW, nH, SmallThre); 	// returns the number of labels
+								// Labels are started from 0
+								// Background regions are labeled as -1
 
 if(LabelCnt > 0)
 {
-	CIpRect *pBoundBox = new CIpRect[LabelCnt];
-	SetLabelBoundBox(Label, nW, nH, pBoundBox, LabelCnt);
+	CIpRect *pBoundBox = new CIpRect[LabelCnt]; 		// Bounding box (AABB: axis aligned bounding box)
+	SetLabelBoundBox(Label, nW, nH, pBoundBox, LabelCnt); 	// extracts bounding boxes
 	
 	// Bounding box processing
 	
